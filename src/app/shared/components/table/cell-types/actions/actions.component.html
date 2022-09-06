@@ -1,0 +1,45 @@
+<div class="actions" *ngIf="element?.length! <= 3">
+  <button
+    mat-icon-button
+    *ngFor="let item of element"
+    [matTooltip]="item.tooltip"
+    [disabled]="item?.disabled || false"
+    (click)="emitAction(item.name); (item?.disabled === true)"
+  >
+    <mat-icon [ngClass]="{ 'disabled-general-color': item?.disabled }">
+      {{ item.name }}
+    </mat-icon>
+  </button>
+</div>
+
+<div class="actions" *ngIf="element?.length! > 3">
+  <button
+    mat-icon-button
+    *ngFor="let item of firstActions"
+    [matTooltip]="item.tooltip"
+    [disabled]="item?.disabled || false"
+    (click)="emitAction(item.name); (item?.disabled === true)"
+  >
+    <mat-icon [ngClass]="{ 'disabled-general-color': item?.disabled }">
+      {{ item.name }}
+    </mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_horiz</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let item of secondActions"
+      [disabled]="item?.disabled || false"
+      (click)="emitAction(item.name)"
+    >
+      <mat-icon [ngClass]="{ 'disabled-general-color': item?.disabled }">
+        {{ item.name }}
+      </mat-icon>
+      <span [ngClass]="{ 'disabled-general-color': item?.disabled }">
+        {{ item.tooltip }}
+      </span>
+    </button>
+  </mat-menu>
+</div>

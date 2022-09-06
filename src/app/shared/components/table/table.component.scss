@@ -1,0 +1,77 @@
+.container {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+
+  td,
+  th {
+    width: 1%;
+    white-space: nowrap;
+    padding: 0px 10px;
+  }
+}
+
+.mat-table-sticky-border-elem-right {
+  box-shadow: inset 1px 0 0 0 #dadcda;
+  text-align: center;
+}
+
+.component-container {
+  box-shadow: 1px 1px 3px #485248;
+  border-radius: 6px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 6px 6px 0px 0px;
+}
+
+table,
+thead {
+  border-radius: 6px 6px 0px 0px;
+}
+
+.paginator {
+  border-radius: 0px 0px 6px 6px;
+}
+
+.disable-col {
+  background-color: #f6f6f6;
+}
+
+.mat-row.cdk-row.ng-star-inserted:hover {
+  background-color: #f1f7ed;
+}
+
+.mat-cell {
+  color: #000000;
+}
+
+:host ::ng-deep label.mat-checkbox-layout {
+  margin: 0px;
+}
+
+.size-text-tbody {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.size-text-thead {
+  font-size: 16px;
+}
+
+.no-records {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.row-is-clicked {
+  font-weight: bold;
+  background-color: #f1f7ed;
+}

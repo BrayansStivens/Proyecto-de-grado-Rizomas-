@@ -1,0 +1,190 @@
+<rizo-loader [loader]="loader"></rizo-loader>
+
+<div class="container mt-5">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-lg-4 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+          />
+          <mat-error>{{ errorEmail() }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-4 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Contraseña"
+            formControlName="password"
+          />
+          <mat-error>{{ errorPassword() }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-4 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role.value">{{
+              role.role
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Identificación</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Identificación"
+            formControlName="identificacion"
+          />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Nombre(s)</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Nombre(s)"
+            formControlName="nombre"
+          />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Primer apellido</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Primer apellido"
+            formControlName="primerApellido"
+          />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Segundo apellido</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Segundo apellido"
+            formControlName="segundoApellido"
+          />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-3" *ngIf="disabledGropu">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Grupo</mat-label>
+          <mat-select formControlName="groups"
+            ><mat-option *ngFor="let group of groups" [value]="group.id">{{
+              group.group
+            }}</mat-option></mat-select
+          >
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3" *ngIf="disabledGropu">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Programa</mat-label>
+          <mat-select formControlName="programs"
+            ><mat-option
+              *ngFor="let program of programs"
+              [value]="program.id"
+              >{{ program.program }}</mat-option
+            ></mat-select
+          >
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-4">
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="fileInput.click()"
+        >
+          Seleccionar archivo
+        </button>
+        <input
+          hidden
+          #fileInput
+          type="file"
+          formControlName="file"
+          accept=".xlsx"
+          (change)="cargarArchivo($event)"
+        />
+        <mat-error>{{ errorFile() }}</mat-error>
+      </div>
+      <div class="col-12 mt-3" *ngIf="archivoExcel">
+        <small
+          >{{ nameFile
+          }}<mat-icon
+            matSuffix
+            color="warn"
+            class="delete_file"
+            (click)="eliminarArchivo()"
+            >close</mat-icon
+          ></small
+        >
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-lg-between row mt-4">
+    <div
+      class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-between"
+    >
+      <button
+        class="btn m-4"
+        mat-flat-button
+        color="primary"
+        [textContent]="'Registar'"
+        (click)="createUser()"
+      ></button>
+
+      <button
+        class="btn m-4"
+        mat-stroked-button
+        color="primary"
+        [textContent]="'Buscar'"
+        (click)="fillTable()"
+      ></button>
+    </div>
+    <div class="col-12 col-lg-8 d-flex justify-content-end">
+      <button
+        class="btn m-4"
+        mat-flat-button
+        color="accent"
+        [textContent]="'Limpiar'"
+        (click)="limpiar()"
+      ></button>
+    </div>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <rizo-table
+      [data]="dataSourse"
+      [columnHeader]="columnHeader"
+      [paginationType]="paginationType"
+      [selectStrategy]="selectStrategy"
+    ></rizo-table>
+  </div>
+</div>

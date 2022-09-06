@@ -1,0 +1,86 @@
+<rizo-loader [loader]="loader"></rizo-loader>
+
+<div class="container mt-5">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Nombre del grupo</mat-label>
+          <input type="text" matInput formControlName="group" />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Semestre</mat-label>
+          <mat-select formControlName="semestre">
+            <mat-option
+              *ngFor="let semestre of semestres"
+              [value]="semestre.value"
+              >{{ semestre.name }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Asignatura</mat-label>
+          <mat-select formControlName="asignaturaId">
+            <mat-option *ngFor="let subject of subjects" [value]="subject.id">{{
+              subject.subject
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3 text-center">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Profesor</mat-label>
+          <mat-select formControlName="profesorId">
+            <mat-option
+              *ngFor="let professor of professors"
+              [value]="professor.id"
+              >{{
+                professor.nombre +
+                  " " +
+                  professor.primerApellido +
+                  " " +
+                  professor.segundoApellido
+              }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-between">
+    <button
+      class="btn m-4"
+      mat-flat-button
+      color="primary"
+      [textContent]="!id ? 'Registar' : 'Actualizar'"
+      (click)="!id ? createGroup() : updateGroup()"
+    ></button>
+
+    <button
+      class="btn m-4"
+      mat-flat-button
+      color="accent"
+      [textContent]="'Limpiar'"
+      (click)="limpiar()"
+    ></button>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <rizo-table
+      [data]="dataSourse"
+      [columnHeader]="columnHeader"
+      [paginationType]="paginationType"
+      [selectStrategy]="selectStrategy"
+      (actionEvent)="actionEvent($event)"
+    ></rizo-table>
+  </div>
+</div>

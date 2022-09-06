@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light rizoNav">
+  <div class="container-fluid">
+    <div class="col-4">
+      <img
+        src="../../../../assets/images/LogoColmayor.png"
+        alt="ColMaLogo"
+        class="img-fluid"
+      />
+      <img
+        src="../../../../assets/images/LogoITM.png"
+        alt="ITMLogo"
+        class="img-fluid"
+      />
+    </div>
+    <div class="col-4">
+      <h1 class="text-center tittle">
+        {{ tittle }}
+      </h1>
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#menu"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="col-4 collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav d-flex justify-content-end">
+        <div class="row logOut" *ngIf="btnLogOut">
+          <button
+            class="fw-bold"
+            mat-raised-button
+            color="warn"
+            [textContent]="textBtnLogOut"
+            (click)="logOut()"
+          ></button>
+        </div>
+        <div class="row login" *ngIf="btnLogin">
+          <button
+            class="fw-bold"
+            mat-raised-button
+            [textContent]="'INICIAR SESIÓN'"
+            (click)="login()"
+          ></button>
+        </div>
+        <div class="row comencemos mt-2" *ngIf="btnStart">
+          <button
+            class="fw-bold"
+            mat-raised-button
+            [textContent]="'COMENCEMOS'"
+            (click)="arbol()"
+          ></button>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

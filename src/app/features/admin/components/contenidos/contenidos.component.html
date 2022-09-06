@@ -1,0 +1,157 @@
+<rizo-loader [loader]="loader"></rizo-loader>
+
+<div class="container mt-5">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Fecha de creación</mat-label>
+          <input
+            formControlName="creado"
+            matInput
+            [matDatepicker]="fechaCreacion"
+          />
+          <mat-hint>DD/MM/AAAA</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="fechaCreacion"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #fechaCreacion disabled="false"></mat-datepicker>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Titulo</mat-label>
+          <input formControlName="titulo" matInput placeholder="Titulo" />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option *ngFor="let state of states" [value]="state.value">{{
+              state.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Autor</mat-label>
+          <input formControlName="autor" matInput placeholder="Autor" />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Visibilidad</mat-label>
+          <mat-select formControlName="esPrivado">
+            <mat-option
+              *ngFor="let visibility of visibilities"
+              [value]="visibility.value"
+              >{{ visibility.name }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="tipo" (valueChange)="typeFile($event)">
+            <mat-option *ngFor="let type of types" [value]="type.value">{{
+              type.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Mapa</mat-label>
+          <mat-select
+            formControlName="mapaId"
+            (valueChange)="getPoints($event)"
+          >
+            <mat-option *ngFor="let map of maps" [value]="map.id">{{
+              map.nombre
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-3">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Punto</mat-label>
+          <mat-select formControlName="puntoId">
+            <mat-option *ngFor="let point of points" [value]="point.id">{{
+              point.nombre
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4 text-center text-lg-start">
+        <button
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="fileInput.click()"
+          [textContent]="'Seleccionar archivo'"
+        ></button>
+        <input
+          hidden
+          #fileInput
+          type="file"
+          formControlName="file"
+          [accept]="aceptFile"
+          (change)="captureFile($event)"
+        />
+        <mat-error class="ms-lg-4">{{ messageFileError }}</mat-error>
+        <small *ngIf="file"
+          >{{ file.fileName }}
+          <button mat-icon-button *ngIf="file">
+            <mat-icon matSuffix color="warn" (click)="deleteFile()"
+              >close</mat-icon
+            >
+          </button>
+        </small>
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-between">
+    <button
+      class="btn m-4"
+      mat-flat-button
+      color="primary"
+      [textContent]="!id ? 'Registar' : 'Actualizar'"
+      (click)="!id ? createContent() : updateContent()"
+    ></button>
+
+    <button
+      class="btn m-4"
+      mat-flat-button
+      color="accent"
+      [textContent]="'Limpiar'"
+      (click)="limpiar()"
+    ></button>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <rizo-table
+      [data]="dataSourse"
+      [columnHeader]="columnHeader"
+      [paginationType]="paginationType"
+      [selectStrategy]="selectStrategy"
+      (actionEvent)="actionEvent($event)"
+    ></rizo-table>
+  </div>
+</div>

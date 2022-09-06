@@ -1,0 +1,154 @@
+<div class="component-container">
+  <div class="table-container">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <table
+      (matSortChange)="sortData.emit($event)"
+      [dataSource]="data"
+      mat-table
+      matSort
+    >
+      <!-- Checkbox Column -->
+      <ng-container
+        *ngIf="selectStrategy !== selectionStrategy.NONE"
+        matColumnDef="select"
+      >
+        <th *matHeaderCellDef mat-header-cell>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            (change)="selectAll($event)"
+            [aria-label]="checkboxLabel()"
+            [checked]="selection?.hasValue() && isAllSelected()"
+            [disabled]="
+              selectStrategy !== selectionStrategy.MULTIPLE || isDisabled()
+            "
+            [indeterminate]="selection?.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td
+          *matCellDef="let row"
+          [ngClass]="{ 'disable-col': row.disable }"
+          mat-cell
+        >
+          <mat-checkbox
+            (change)="$event ? selection?.toggle(row) : null"
+            (change)="selectItem(row, $event)"
+            (click)="$event.stopPropagation()"
+            [aria-label]="checkboxLabel(row)"
+            [checked]="isChecked(row)"
+            [disabled]="row.disable"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Column revisar el i si ya no se necesita -->
+      <ng-container
+        *ngFor="let col of objectKeys(columnHeader); let i = index"
+        [stickyEnd]="columnHeader[col].type === 'ACTIONS'"
+        matColumnDef="{{ col }}"
+      >
+        <ng-container
+          *ngIf="columnHeader[col].type === 'ACTIONS'; else noActions"
+        >
+          <th *matHeaderCellDef class="size-text-thead" mat-header-cell>
+            {{ columnHeader[col].label }}
+          </th>
+        </ng-container>
+        <ng-template #noActions>
+          <th
+            *matHeaderCellDef
+            class="size-text-thead"
+            mat-header-cell
+            mat-sort-header
+          >
+            {{ columnHeader[col].label }}
+          </th>
+        </ng-template>
+        <td
+          *matCellDef="let element; let i = index"
+          [ngClass]="{ 'disable-col': element.disable }"
+          class="size-text-tbody"
+          mat-cell
+        >
+          <div *ngIf="columnHeader[col].type === 'LINK'">
+            <rizo-link [disable]="element.disable" [element]="element[col]">
+            </rizo-link>
+          </div>
+
+          <div *ngIf="columnHeader[col].type === 'DOUBLEDATA'">
+            <rizo-double-date
+              [disable]="element.disable"
+              [element]="element[col]"
+            >
+            </rizo-double-date>
+          </div>
+
+          <div *ngIf="columnHeader[col].type === 'ICON_TEXT'">
+            <rizo-icon-text
+              [disable]="element.disable"
+              [element]="element[col]"
+            >
+            </rizo-icon-text>
+          </div>
+
+          <div
+            *ngIf="columnHeader[col].type === 'HTML'"
+            [innerHTML]="element[col]"
+          ></div>
+
+          <div *ngIf="columnHeader[col].type === 'IMAGES'">
+            <rizo-images [disable]="element.disable" [element]="element[col]">
+            </rizo-images>
+          </div>
+
+          <div *ngIf="columnHeader[col].type === 'STAR_RATE'">
+            <rizo-star-rate
+              [disable]="element.disable"
+              [element]="element[col]"
+            >
+            </rizo-star-rate>
+          </div>
+
+          <div *ngIf="columnHeader[col].type === 'ACTIONS'">
+            <rizo-actions
+              (actionEvent)="actionEvent.emit($event)"
+              [element]="element[col]"
+              [index]="i"
+              [row]="element"
+            >
+            </rizo-actions>
+          </div>
+
+          <div
+            *ngIf="!columnHeader[col].type"
+            [ngClass]="{ 'disabled-general-color': element.disable }"
+          >
+            {{ element[col] }}
+          </div>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+        [class.row-is-clicked]="clickedRows.includes(row)"
+        mat-row
+      ></tr>
+    </table>
+    <div *ngIf="!data?.data?.length && !isLoading" class="no-records">
+      No hay registros
+    </div>
+  </div>
+  <mat-paginator
+    (page)="onChangePage($event)"
+    [attr.style]="
+      paginationType && paginationType === 'None' ? 'display: none' : undefined
+    "
+    [length]="totalRows"
+    [pageSizeOptions]="[5, 10, 20]"
+    class="paginator"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

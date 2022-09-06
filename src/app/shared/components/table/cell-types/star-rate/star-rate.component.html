@@ -1,0 +1,11 @@
+<div style="color: #f4c107" [ngClass]="{ 'disabled-general-color': disable }">
+  <mat-icon *ngFor="let item of [].constructor(element.rate)">star</mat-icon>
+
+  <mat-icon
+    *ngFor="
+      let item of [].constructor(subtraction(element.total, element.rate))
+    "
+    >star_outline</mat-icon
+  >
+</div>
+

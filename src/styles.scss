@@ -1,0 +1,304 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  background: #eaeff0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8ac464;
+  border-radius: 5px;
+}
+
+@include mat.core();
+
+$custom-typography: mat.define-typography-config(
+  $font-family: "Poppins, monospace",
+  $display-4: mat.define-typography-level(112px, 112px, 300),
+  $display-3: mat.define-typography-level(56px, 56px, 400),
+  $display-2: mat.define-typography-level(45px, 48px, 400),
+  $display-1: mat.define-typography-level(34px, 40px, 400),
+  $headline: mat.define-typography-level(32px, 48px, 700),
+  $title: mat.define-typography-level(20px, 32px, 500),
+  $subheading-2: mat.define-typography-level(18px, 28px, 400),
+  $subheading-1: mat.define-typography-level(15px, 24px, 400),
+  $body-1: mat.define-typography-level(14px, 24px, 500),
+  $body-2: mat.define-typography-level(14px, 24px, 500),
+  $button: mat.define-typography-level(14px, 14px, 500),
+  $input: mat.define-typography-level(14px, 1.25, 400),
+  $caption: mat.define-typography-level(12px, 20px, 400),
+);
+
+@include mat.core($custom-typography);
+
+$rizo-primary: (
+  50: #ebf5e4,
+  100: #cde6bc,
+  200: #acd590,
+  300: #8ac464,
+  400: #71b742,
+  500: #58aa21,
+  600: #50a31d,
+  700: #479918,
+  800: #3d9014,
+  900: #2d7f0b,
+  A100: #c3ffb0,
+  A200: #9cff7d,
+  A400: #75ff4a,
+  A700: #62ff30,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$rizo-primary2-color: (
+  50: #f1f7ed,
+  100: #ebf5e4,
+  200: #ebf5e4,
+  300: #d2e3c7,
+  400: #d8edc9,
+  500: #cde6bc,
+  600: #8ac464,
+  700: #3d9014,
+  800: #3d9014,
+  900: #2d7f0b,
+  A100: #c3ffb0,
+  A200: #9cff7d,
+  A400: #75ff4a,
+  A700: #62ff30,
+  contrast: (
+    50: #6f6974,
+    100: #6f6974,
+    200: #6f6974,
+    300: #6f6974,
+    400: #6f6974,
+    500: #6f6974,
+    600: #6f6974,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$rizo-secondary: (
+  50: #fff9e0,
+  100: #fff0b3,
+  200: #ffe680,
+  300: #ffdb4d,
+  400: #ffd426,
+  500: #ffcc00,
+  600: #ffc700,
+  700: #ffc000,
+  800: #ffb900,
+  900: #ffad00,
+  A100: #ffffff,
+  A200: #fffaf2,
+  A400: #ffe8bf,
+  A700: #ffdfa6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$front-rizomas-primary: mat.define-palette($rizo-primary);
+$front-rizomas-accent: mat.define-palette($rizo-secondary, 500);
+
+$front-rizomas-warn: mat.define-palette(mat.$deep-orange-palette);
+
+$front-rizomas-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $front-rizomas-primary,
+      accent: $front-rizomas-accent,
+      warn: $front-rizomas-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($front-rizomas-theme);
+
+$primary: mat.get-color-from-palette(mat.define-palette($rizo-primary, 500));
+
+$primary-100: mat.get-color-from-palette(
+  mat.define-palette($rizo-primary, 100)
+);
+
+$primary2: mat.get-color-from-palette(mat.define-palette($rizo-primary2-color));
+
+$secondary: mat.get-color-from-palette(mat.define-palette($rizo-secondary));
+
+$loader: mat.get-color-from-palette(mat.define-palette($rizo-primary, 900));
+
+//Perzonalizacion de Botones
+
+.mat-button-base.mat-primary {
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.mat-button-base.mat-accent {
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.mat-button-base.mat-warn {
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.mat-flat-button.mat-button-base.mat-primary {
+  background-color: $primary;
+  color: white;
+}
+
+.mat-flat-button.mat-button-base.mat-primary:hover:not(.mat-button-disabled) {
+  background-color: $primary;
+}
+
+.mat-flat-button.mat-button-base.mat-primary:active:not(.mat-button-disabled) {
+  background-color: $primary;
+}
+
+.mat-flat-button.mat-button-base.mat-primary.mat-button-disabled {
+  background-color: $primary-100;
+}
+
+.mat-stroked-button.mat-button-base.mat-primary {
+  color: $primary;
+  border: 0.5px solid $primary;
+  background-color: white;
+}
+
+.mat-stroked-button.mat-button-base.mat-primary:hover:not(.mat-button-disabled) {
+  color: $primary;
+  border: 0.5px solid $primary;
+}
+
+.mat-stroked-button.mat-button-base.mat-primary:active:not(.mat-button-disabled) {
+  color: $primary;
+  border: 0.5px solid $primary;
+}
+
+.mat-stroked-button.mat-button-base.mat-primary.mat-button-disabled {
+  color: $primary-100;
+  border: 0.5px solid $primary-100;
+}
+
+.mat-icon-button.mat-button-base.mat-primary {
+  color: $primary;
+  background-color: white;
+}
+
+button.btn-icon-form {
+  margin: 0.25em 0;
+  border: 1px solid #babcbe;
+  color: #484d52;
+  height: 55px;
+  width: 80px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+/* inputs */
+.mat-form-field-required-marker {
+  visibility: hidden;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: whitesmoke;
+  border-radius: 5px;
+}
+.mat-form-field-label {
+  color: #a5a9a3;
+}
+.mat-form-field-appearance-outline.mat-form-field-disabled
+  .mat-form-field-label {
+  color: #d0d4d0;
+}
+.mat-form-field-appearance-outline:not(.mat-form-field-disabled):not(.mat-form-field-invalid)
+  .mat-form-field-flex
+  .mat-form-field-outline {
+  color: #babeba;
+}
+.mat-slide-toggle:not(.mat-disabled):not(.mat-checked) .mat-slide-toggle-bar {
+  background-color: #495248;
+}
+button.btn-icon-form {
+  margin: 0.25em 0;
+  border: 1px solid#babeba;
+  color: #485249;
+  height: 55px;
+  width: 54px;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+/**Tabs**/
+.mat-tab-label {
+  font-size: 16px;
+  font-weight: bolder;
+}
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $primary;
+  border-radius: 2px;
+  height: 4px;
+}
+
+html,
+body {
+  height: 100%;
+}
+app-root {
+  display: block;
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3Crect stroke='%23ffffff' stroke-width='0.4' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='3' height='3' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cuse fill='%23fcfcfc' href='%23s' y='2'/%3E%3Cuse fill='%23fcfcfc' href='%23s' x='1' y='2'/%3E%3Cuse fill='%23fafafa' href='%23s' x='2' y='2'/%3E%3Cuse fill='%23fafafa' href='%23s'/%3E%3Cuse fill='%23f7f7f7' href='%23s' x='2'/%3E%3Cuse fill='%23f7f7f7' href='%23s' x='1' y='1'/%3E%3C/pattern%3E%3Cpattern id='b' width='7' height='11' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23f5f5f5'%3E%3Cuse href='%23s'/%3E%3Cuse href='%23s' y='5' /%3E%3Cuse href='%23s' x='1' y='10'/%3E%3Cuse href='%23s' x='2' y='1'/%3E%3Cuse href='%23s' x='2' y='4'/%3E%3Cuse href='%23s' x='3' y='8'/%3E%3Cuse href='%23s' x='4' y='3'/%3E%3Cuse href='%23s' x='4' y='7'/%3E%3Cuse href='%23s' x='5' y='2'/%3E%3Cuse href='%23s' x='5' y='6'/%3E%3Cuse href='%23s' x='6' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='h' width='5' height='13' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23f5f5f5'%3E%3Cuse href='%23s' y='5'/%3E%3Cuse href='%23s' y='8'/%3E%3Cuse href='%23s' x='1' y='1'/%3E%3Cuse href='%23s' x='1' y='9'/%3E%3Cuse href='%23s' x='1' y='12'/%3E%3Cuse href='%23s' x='2'/%3E%3Cuse href='%23s' x='2' y='4'/%3E%3Cuse href='%23s' x='3' y='2'/%3E%3Cuse href='%23s' x='3' y='6'/%3E%3Cuse href='%23s' x='3' y='11'/%3E%3Cuse href='%23s' x='4' y='3'/%3E%3Cuse href='%23s' x='4' y='7'/%3E%3Cuse href='%23s' x='4' y='10'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='17' height='13' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23f2f2f2'%3E%3Cuse href='%23s' y='11'/%3E%3Cuse href='%23s' x='2' y='9'/%3E%3Cuse href='%23s' x='5' y='12'/%3E%3Cuse href='%23s' x='9' y='4'/%3E%3Cuse href='%23s' x='12' y='1'/%3E%3Cuse href='%23s' x='16' y='6'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='19' height='17' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23ffffff'%3E%3Cuse href='%23s' y='9'/%3E%3Cuse href='%23s' x='16' y='5'/%3E%3Cuse href='%23s' x='14' y='2'/%3E%3Cuse href='%23s' x='11' y='11'/%3E%3Cuse href='%23s' x='6' y='14'/%3E%3C/g%3E%3Cg fill='%23efefef'%3E%3Cuse href='%23s' x='3' y='13'/%3E%3Cuse href='%23s' x='9' y='7'/%3E%3Cuse href='%23s' x='13' y='10'/%3E%3Cuse href='%23s' x='15' y='4'/%3E%3Cuse href='%23s' x='18' y='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='53' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23EFEFEF'%3E%3Cuse href='%23s' x='2' y='5'/%3E%3Cuse href='%23s' x='16' y='38'/%3E%3Cuse href='%23s' x='46' y='42'/%3E%3Cuse href='%23s' x='29' y='20'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='59' height='71' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23EFEFEF'%3E%3Cuse href='%23s' x='33' y='13'/%3E%3Cuse href='%23s' x='27' y='54'/%3E%3Cuse href='%23s' x='55' y='55'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='g' width='139' height='97' patternUnits='userSpaceOnUse' patternTransform='rotate(75 1000 750) scale(18.05) translate(-944.6 -708.45)'%3E%3Cg fill='%23EFEFEF'%3E%3Cuse href='%23s' x='11' y='8'/%3E%3Cuse href='%23s' x='51' y='13'/%3E%3Cuse href='%23s' x='17' y='73'/%3E%3Cuse href='%23s' x='99' y='57'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23b)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23h)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23c)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23d)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23e)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23f)' width='100%25' height='100%25'/%3E%3Crect fill='url(%23g)' width='100%25' height='100%25'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}

@@ -1,0 +1,123 @@
+<rizo-loader [loader]="loader"></rizo-loader>
+
+<div class="container mt-5">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="nombre"
+            placeholder="Nombre"
+          />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Titulo</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="titulo"
+            placeholder="Titulo"
+          />
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            matInput
+            formControlName="descripcion"
+            placeholder="Descripción"
+          ></textarea>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Mapa</mat-label>
+          <mat-select formControlName="mapaId">
+            <mat-option *ngFor="let map of maps" [value]="map.id">{{
+              map.nombre
+            }}</mat-option>
+          </mat-select>
+          <mat-error>Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-4 text-center">
+        <button
+          class="w-75 mb-lg-0 mb-3"
+          type="button"
+          mat-raised-button
+          color="accent"
+          (click)="fileInput.click()"
+          [textContent]="'Seleccionar imagen'"
+        ></button>
+        <input
+          hidden
+          #fileInput
+          type="file"
+          formControlName="file"
+          accept=".png"
+          (change)="captureFile($event)"
+        />
+        <mat-error>{{ messageFileError }}</mat-error>
+        <small *ngIf="file"
+          >{{ file.fileName }}
+          <button mat-icon-button *ngIf="file">
+            <mat-icon matSuffix color="warn" (click)="deleteFile()"
+              >close</mat-icon
+            >
+          </button>
+        </small>
+      </div>
+      <div class="col-12 col-lg-4 text-center" *ngIf="id">
+        <button
+          class="w-75 mt-3 mt-lg-0"
+          type="button"
+          mat-raised-button
+          color="accent"
+          [textContent]="'Descargar imagen'"
+          (click)="downloadImage($event)"
+        ></button>
+
+        <mat-error></mat-error>
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-between">
+    <button
+      class="btn m-4"
+      mat-flat-button
+      color="primary"
+      [textContent]="'Actualizar'"
+      (click)="createPoint()"
+    ></button>
+
+    <button
+      class="btn m-4"
+      mat-flat-button
+      color="accent"
+      [textContent]="'Limpiar'"
+      (click)="limpiar()"
+    ></button>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <rizo-table
+      [data]="dataSourse"
+      [columnHeader]="columnHeader"
+      [paginationType]="paginationType"
+      [selectStrategy]="selectStrategy"
+      (actionEvent)="actionEvent($event)"
+    ></rizo-table>
+  </div>
+</div>

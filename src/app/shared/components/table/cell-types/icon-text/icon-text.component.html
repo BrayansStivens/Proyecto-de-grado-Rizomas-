@@ -1,0 +1,6 @@
+<div class="icon-text" [ngClass]="{ 'disabled-general-color': disable }">
+  <mat-icon [ngStyle]="{ 'color': element.color }" class="size-icon">
+    {{ element.icon ? element.icon : 'fiber_manual_record'}}
+  </mat-icon>
+  <span>{{ element.text }}</span>
+</div>
