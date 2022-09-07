@@ -1,0 +1,105 @@
+svg {
+  width: 600px;
+}
+
+@media (max-width: 480px) {
+  svg {
+    width: 360px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  svg {
+    width: 600px;
+  }
+}
+
+.delfin_1_ {
+  transform: matrix(1.0655, 0.0364, -0.033, 0.966, 528.9697, 1278.792);
+}
+
+.delfin_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.1955, 0.0364, -0.033, 1.0966, 528.9697, 1278.792);
+}
+
+.pajaro_1_ {
+  transform: matrix(0.744, 0, 0, 0.6943, 582.147, 143.46);
+}
+
+.pajaro_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(0.843, 0, 0, 0.8, 582.147, 143.46);
+}
+
+.oso_1_ {
+  transform: matrix(0.4148, 0, 0, 0.5406, 642.9834, 828.8965);
+}
+
+.oso_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(0.5148, 0, 0, 0.6406, 642.9834, 828.8965);
+}
+
+.pinguinos_1_ {
+  transform: matrix(0.9987, 0, 0, 1.0275, 22.9805, 1294.7695);
+}
+
+.pinguinos_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.0987, 0, 0, 1.0975, 22.9805, 1294.7695);
+}
+
+.barco_1_ {
+  transform: matrix(0.9361, 0.0013, -0.0013, 0.9866, 495.8843, 1397.4434);
+}
+
+.barco_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.08361, 0.0013, -0.0013, 1.08866, 495.8843, 1397.4434);
+}
+
+.montana_1_ {
+  transform: matrix(0.9641, 0.0366, -0.0388, 1.0195, 33.979, 1076.8594);
+}
+
+.montana_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.08641, 0.0366, -0.0388, 1.0995, 33.979, 1076.8594);
+}
+
+.tortuga_1_ {
+  transform: matrix(0.571, 0, 0, 0.5202, 887.4805, 1181.1279);
+}
+
+.tortuga_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(0.671, 0, 0, 0.6202, 887.4805, 1181.1279);
+}
+
+.tigre_1_ {
+  transform: matrix(0.8489, 0, 0, 0.8723, 233.98, 496.793);
+}
+
+.tigre_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(0.9489, 0, 0, 0.9723, 233.98, 496.793);
+}
+
+.maiz_1_ {
+  transform: matrix(0.9977, 0, 0, 1.0004, 31.4805, 362.4727);
+}
+
+.maiz_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.09977, 0, 0, 1.06, 31.4805, 362.4727);
+}

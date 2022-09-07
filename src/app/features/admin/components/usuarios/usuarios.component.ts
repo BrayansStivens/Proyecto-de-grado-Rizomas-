@@ -85,7 +85,7 @@ export class UsuariosComponent implements OnInit {
       segundoApellido: ['', Validators.required],
       groups: [''],
       programs: [''],
-      file: ['', Validators.pattern('^.*.(.xlsx)$')],
+      file: ['', Validators.pattern('^.*.(.csv)$')],
     });
   }
 
@@ -153,6 +153,10 @@ export class UsuariosComponent implements OnInit {
   }
 
   createUser(): void {
+    if (this.archivoExcel) {
+      this.subirArchivo();
+      return;
+    }
     if (this.form.valid) {
       this.loader = true;
       const { role, groups, file, ...rest } = this.form.value;
@@ -239,24 +243,47 @@ export class UsuariosComponent implements OnInit {
   }
 
   cargarArchivo(event: any) {
-    /* const archivo = event.target.files[0];
-    console.log(archivo);
-
     const [file] = event.target.files;
     this.archivoExcel = {
       fileRaw: file,
       fileName: file.name,
     };
     this.form.disable();
-    this.nameFile = file.name; */
+    this.nameFile = file.name;
   }
 
-  subirArchivo() {}
+  subirArchivo() {
+    this.loader = true;
+    const fileForm = new FormData();
+    console.log(this.archivoExcel);
+    fileForm.append(
+      'files',
+      this.archivoExcel.fileRaw,
+      this.archivoExcel.fileName
+    );
+    this.usuariosService.registerByFile(fileForm).subscribe(
+      () => {
+        this.loader = false;
+        this.alertService.mensajeCorrecto(
+          'Registro exitoso',
+          'Usuarios creados con exito 😇'
+        );
+      },
+      (error: any) => {
+        this.loader = false;
+        this.alertService.mensajeError(
+          'Registro fallido',
+          `Usuarios no creados, error: ${{ error }}`
+        );
+      }
+    );
+  }
 
   eliminarArchivo(): void {
     this.form.get('file')?.reset();
     this.archivoExcel = null;
     this.form.enable();
+    this.form.updateValueAndValidity();
   }
   //Control de mensajes HTML
   errorEmail(): string {
@@ -303,5 +330,8 @@ export class UsuariosComponent implements OnInit {
     this.form.reset({
       role: { claimName: '', claimValue: '' },
     });
+    this.archivoExcel = null;
+    this.form.enable();
+    this.form.updateValueAndValidity();
   }
 }

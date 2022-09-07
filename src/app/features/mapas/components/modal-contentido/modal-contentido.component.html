@@ -1,0 +1,53 @@
+<div matDialogTitle>
+  <div class="float-end">
+    <button mat-icon-button matDialogClose>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h1 class="fw-bold text-center">{{ data.punto.titulo }}</h1>
+</div>
+<div matDialogContent>
+  <div class="container mt-3">
+    <div class="text-center">
+      <img
+        width="250px"
+        [src]="data.punto.archivo"
+        class="img-fluid"
+        [alt]="data.punto.nombre"
+      />
+    </div>
+    <p [innerHTML]="data.punto.descripcion"></p>
+
+    <div class="row">
+      <div class="col-12 col-lg-6" *ngIf="true">
+        <div class="ratio ratio-16x9">
+          <iframe
+            src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+            title="YouTube video"
+            allowfullscreen
+            video
+            controls
+          ></iframe>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 text-center my-lg-auto" *ngIf="true">
+        <div class="my-5">
+          <button
+            type="button"
+            mat-raised-button
+            color="accent"
+            (click)="documentFile.click()"
+            [textContent]="'Ver documento'"
+          ></button>
+          <a href="#" #documentFile src=""></a>
+        </div>
+        <div class="w-100">
+          <audio
+            src="../../../../../assets/audio/AUDIO_RIZOMAS.mp3"
+            controls
+          ></audio>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

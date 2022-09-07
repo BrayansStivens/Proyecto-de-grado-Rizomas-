@@ -74,7 +74,7 @@ export class PuntosComponent implements OnInit {
     this.errorFile();
   }
 
-  createPoint(): void {
+  /* createPoint(): void {
     if (this.form.valid) {
       this.loader = true;
       const { nombre, titulo, descripcion, mapaId } = this.form.value;
@@ -91,6 +91,36 @@ export class PuntosComponent implements OnInit {
           this.alertService.mensajeCorrecto(
             'Registro exitoso',
             'Punto creado con exito 😇'
+          );
+          this.limpiar();
+          this.fillTable();
+        },
+        () => (this.loader = false)
+      );
+    } else {
+      this.errorFile();
+      this.form.markAllAsTouched();
+    }
+  }
+ */
+
+  createPoint(): void {
+    if (this.form.valid) {
+      this.loader = true;
+      const { nombre, titulo, descripcion, mapaId } = this.form.value;
+      const fileForm = new FormData();
+      fileForm.append('Nombre', nombre);
+      fileForm.append('Titulo', titulo);
+      fileForm.append('Descripcion', descripcion);
+      fileForm.append('Archivo', this.file.fileRaw, this.file.fileName);
+      fileForm.append('MapaId', mapaId);
+
+      this.puntosService.updatePonit(fileForm, this.id).subscribe(
+        () => {
+          this.loader = false;
+          this.alertService.mensajeCorrecto(
+            'Registro exitoso',
+            'Punto actualizado con exito 😇'
           );
           this.limpiar();
           this.fillTable();

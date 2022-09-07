@@ -17,6 +17,23 @@ const routes: Routes = [
     },
     canActivate: [AuthGuard],
   },
+  {
+    path: 'mapas',
+    loadChildren: () =>
+      import('./features/mapas/mapas.module').then((m) => m.MapasModule),
+    data: {
+      role: 'estudiante',
+    },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'invitados',
+    loadChildren: () =>
+      import('./features/mapas/mapas.module').then((m) => m.MapasModule),
+    data: {
+      role: 'invitado',
+    },
+  },
 ];
 
 @NgModule({

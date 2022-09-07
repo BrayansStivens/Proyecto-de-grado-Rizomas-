@@ -1,19 +1,17 @@
 <div class="conteiner h-100">
   <rizo-navbar></rizo-navbar>
+  <div class="float-end button-container">
+    <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="animations = !animations">
+        <mat-icon>style</mat-icon>
+        <span>Desactivar/Activar animaciones</span>
+      </button>
+    </mat-menu>
+  </div>
   <div class="container mt-5 d-flex flex-column justify-content-center">
-    <div class="row d-flex justify-content-end">
-      <div class="button-container me-auto">
-        <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="animations = !animations">
-            <mat-icon>style</mat-icon>
-            <span>Desactivar/Activar animaciones</span>
-          </button>
-        </mat-menu>
-      </div>
-    </div>
     <rizo-logo [animation]="animations"></rizo-logo>
     <div class="row mt-5">
       <div class="col-12 col-lg-12 d-flex justify-content-center">

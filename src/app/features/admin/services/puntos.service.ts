@@ -32,7 +32,10 @@ export class PuntosService {
   }
 
   updatePonit(payload: any, param: any): Observable<any> {
-    return this.webRequest.putWithHeaders(this.pathPoints, payload, param);
+    return this.webRequest.putWithHeaders(
+      `${this.pathPoints}/${param}`,
+      payload
+    );
   }
 
   deletePonit(param: any): Observable<any> {
