@@ -1,3 +1,3 @@
 export const Constants = {
-  ROOT_URL: 'https://localhost:7140/api',
+  ROOT_URL: 'https://rizomasapi.azurewebsites.net',
 };
