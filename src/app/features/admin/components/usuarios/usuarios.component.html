@@ -93,7 +93,7 @@
       <div class="col-12 col-lg-3" *ngIf="disabledGropu">
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>Grupo</mat-label>
-          <mat-select formControlName="groups"
+          <mat-select formControlName="grupoId"
             ><mat-option *ngFor="let group of groups" [value]="group.id">{{
               group.group
             }}</mat-option></mat-select
@@ -104,7 +104,7 @@
       <div class="col-12 col-lg-3" *ngIf="disabledGropu">
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>Programa</mat-label>
-          <mat-select formControlName="programs"
+          <mat-select formControlName="programaId"
             ><mat-option
               *ngFor="let program of programs"
               [value]="program.id"

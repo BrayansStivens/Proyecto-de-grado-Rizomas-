@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertsService } from 'src/app/shared/services/alert.service';
 import { LoginService } from '../../services/login.service';
+import { UsuariosService } from '../../../../features/admin/services/usuarios.service';
 
 @Component({
   selector: 'login-login-modal',
@@ -21,6 +22,7 @@ export class LoginModalComponent implements OnInit {
     private dialogReft: MatDialogRef<LoginModalComponent>,
     private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private UsuariosService: UsuariosService,
     private alertService: AlertsService
   ) {
     this.createForm();
@@ -45,7 +47,7 @@ export class LoginModalComponent implements OnInit {
     });
   }
 
-  get controls(): any {
+  getcontrols(): any {
     return this.form.controls;
   }
 
@@ -57,7 +59,6 @@ export class LoginModalComponent implements OnInit {
           this.loginService.saveToken(response);
           this.loginService.getToken();
           this.validateRol();
-
           this.form.reset;
           this.dialogReft.close();
           this.loader = false;
@@ -76,6 +77,14 @@ export class LoginModalComponent implements OnInit {
     }
   }
 
+  getIdUser(): void {
+    this.UsuariosService.getUserByEmail({
+      email: this.form.get('email')?.value,
+    }).subscribe((response) => {
+      this.router.navigateByUrl(`mapas/menu/id:${response.id}`);
+    });
+  }
+
   validateRol(): void {
     if (this.loginService.obtenerCampoJWT('EsAdmin')) {
       this.router.navigateByUrl('admin');
@@ -84,17 +93,17 @@ export class LoginModalComponent implements OnInit {
         this.form.get('email')?.value
       );
     } else if (this.loginService.obtenerCampoJWT('EsEstudiante')) {
+      this.getIdUser();
       this.alertService.mensajeCorrecto(
         'BIENVENIDO',
         this.form.get('email')?.value
       );
-      this.router.navigateByUrl('mapas');
     } else if (this.loginService.obtenerCampoJWT('EsDocente')) {
+      this.router.navigateByUrl('docente');
       this.alertService.mensajeCorrecto(
         'BIENVENIDO',
         this.form.get('email')?.value
       );
-      this.router.navigateByUrl('docentes');
     }
   }
 

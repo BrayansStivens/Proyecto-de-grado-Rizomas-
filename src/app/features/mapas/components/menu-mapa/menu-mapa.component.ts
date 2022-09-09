@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'rizo-menu-mapa',
@@ -10,9 +11,15 @@ export class MenuMapaComponent implements OnInit {
 
   textBtnLogOut!: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url.includes('invitados')) {
+      this.textBtnLogOut = 'VOLVER';
+    } else {
+      this.textBtnLogOut = 'SALIR';
+    }
+  }
 
   tabChange(event: any) {
     this.ventana.emit(event.tab.textLabel);

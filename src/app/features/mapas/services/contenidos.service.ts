@@ -22,6 +22,10 @@ export class ContenidosService {
     return this.webRequest.getWithHeaders(`${this.path}/mapa/${param}`);
   }
 
+  getContentsByPoint(param: string) {
+    return this.webRequest.getWithHeaders(`${this.path}/puntos/${param}`);
+  }
+
   updateContent(payload: any, param: any): Observable<any> {
     return this.webRequest.putWithHeaders(`${this.path}/${param}`, payload);
   }

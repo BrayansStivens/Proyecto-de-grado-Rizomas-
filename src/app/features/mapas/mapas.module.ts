@@ -9,7 +9,12 @@ import { SharedModule } from '../../shared/shared.module';
 import { ModalContentidoComponent } from './components/modal-contentido/modal-contentido.component';
 
 @NgModule({
-  declarations: [MenuMapaComponent, ArbolComponent, MujeresComponent, ModalContentidoComponent],
+  declarations: [
+    MenuMapaComponent,
+    ArbolComponent,
+    MujeresComponent,
+    ModalContentidoComponent,
+  ],
   imports: [CommonModule, MapasRoutingModule, SharedModule],
 })
 export class MapasModule {}

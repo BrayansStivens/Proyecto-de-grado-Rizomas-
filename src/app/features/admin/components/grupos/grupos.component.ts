@@ -27,6 +27,7 @@ export class GruposComponent implements OnInit {
   subjects!: Array<any>;
   professors!: Array<any>;
   id!: string;
+  pupils: Array<any> = [];
 
   columnHeader = {
     group: { label: 'Nombre' },
@@ -145,25 +146,29 @@ export class GruposComponent implements OnInit {
   updateGroup(): void {
     if (this.form.valid) {
       this.loader = true;
-      this.gruposService.updateGroup(this.id, this.form.value).subscribe(
-        () => {
-          this.loader = false;
-          this.alertService.mensajeCorrecto(
-            'Registo exitoso',
-            'Grupo actualizado con exito 😇 '
-          );
-          this.fillTable();
-          this.form.reset();
-          this.id = '';
-        },
-        (error: any) => {
-          this.loader = false;
-          this.alertService.mensajeError(
-            'Registro fallido',
-            `Grupo no actualizado, error: ${{ error }}`
-          );
-        }
-      );
+      const payload = this.form.value;
+      payload.alumno = this.pupils;
+      this.gruposService
+        .updateGroup({ id: this.id }, this.form.value)
+        .subscribe(
+          () => {
+            this.loader = false;
+            this.alertService.mensajeCorrecto(
+              'Registo exitoso',
+              'Grupo actualizado con exito 😇 '
+            );
+            this.fillTable();
+            this.form.reset();
+            this.id = '';
+          },
+          (error: any) => {
+            this.loader = false;
+            this.alertService.mensajeError(
+              'Registro fallido',
+              `Grupo no actualizado, error: ${{ error }}`
+            );
+          }
+        );
     } else {
       this.form.markAllAsTouched();
     }
@@ -201,9 +206,13 @@ export class GruposComponent implements OnInit {
   }
 
   actionEvent(event: any) {
-    this.id = event.row.id;
+    console.log(event.row);
     if (event.action === 'create') {
       this.form.patchValue(event.row);
+      this.id = event.row.id;
+      if (event.row.alumno) {
+        this.pupils = event.row.alumno;
+      }
     }
     if (event.action === 'delete') {
       this.deleteGroup(event.row);

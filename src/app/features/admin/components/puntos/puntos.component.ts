@@ -104,7 +104,7 @@ export class PuntosComponent implements OnInit {
   }
  */
 
-  createPoint(): void {
+  updatePoint(): void {
     if (this.form.valid) {
       this.loader = true;
       const { nombre, titulo, descripcion, mapaId } = this.form.value;

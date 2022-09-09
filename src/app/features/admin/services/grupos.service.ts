@@ -22,7 +22,7 @@ export class GruposService {
   }
 
   updateGroup(params: any, payload: any): Observable<any> {
-    return this.webRequest.put(`${this.path}/${params}`, payload);
+    return this.webRequest.put(this.path, payload, params);
   }
 
   deleteGroup(param: any): Observable<any> {
@@ -30,6 +30,6 @@ export class GruposService {
   }
 
   getPupilbyGroup(param: any): Observable<any> {
-    return this.webRequest.get(this.path, param);
+    return this.webRequest.get(`${this.path}/${param}`);
   }
 }

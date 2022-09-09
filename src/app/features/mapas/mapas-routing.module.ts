@@ -6,6 +6,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
+      { path: 'menu/:id', component: MenuMapaComponent },
       { path: 'menu', component: MenuMapaComponent },
       {
         path: '**',

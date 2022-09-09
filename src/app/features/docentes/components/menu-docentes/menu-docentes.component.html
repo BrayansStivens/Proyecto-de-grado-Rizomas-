@@ -1,0 +1,16 @@
+<rizo-navbar
+  [btnLogin]="false"
+  [btnStart]="false"
+  [btnLogOut]="true"
+  [textBtnLogOut]="'SALIR'"
+  [tittle]="'DOCENTES'"
+></rizo-navbar>
+<mat-tab-group
+  mat-align-tabs="center"
+  animationDuration="1500ms"
+  (selectedTabChange)="tabChange($event)"
+>
+  <mat-tab label="Alumnos">
+    <rizo-administrador-alumnos></rizo-administrador-alumnos>
+  </mat-tab>
+</mat-tab-group>

@@ -29,6 +29,10 @@ export class UsuariosService {
     return this.webRequest.getWithHeaders(`${this.path}/RolPorUsuario`, params);
   }
 
+  getAllUsers(): Observable<any> {
+    return this.webRequest.getWithHeaders(this.path);
+  }
+
   getUserByEmail(params: any): Observable<any> {
     return this.webRequest.getWithHeaders(
       `${this.path}/UsuarioPorEmail`,

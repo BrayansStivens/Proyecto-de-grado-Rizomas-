@@ -18,20 +18,29 @@
     </div>
     <p [innerHTML]="data.punto.descripcion"></p>
 
-    <div class="row">
-      <div class="col-12 col-lg-6" *ngIf="true">
+    <div class="row mt-5">
+      <div
+        [ngClass]="texto || audio ? 'col-12 col-lg-6' : 'col-12'"
+        *ngIf="video"
+      >
         <div class="ratio ratio-16x9">
           <iframe
-            src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-            title="YouTube video"
+            [src]="video.archivo | safe"
             allowfullscreen
             video
             controls
           ></iframe>
         </div>
       </div>
-      <div class="col-12 col-lg-6 text-center my-lg-auto" *ngIf="true">
-        <div class="my-5">
+      <div
+        [ngClass]="
+          video
+            ? 'col-12 col-lg-6 text-center my-lg-auto'
+            : 'col-12 text-center my-lg-auto'
+        "
+        *ngIf="texto || audio"
+      >
+        <div class="my-5" *ngIf="texto">
           <button
             type="button"
             mat-raised-button
@@ -39,13 +48,10 @@
             (click)="documentFile.click()"
             [textContent]="'Ver documento'"
           ></button>
-          <a href="#" #documentFile src=""></a>
+          <a [href]="texto.archivo | safe" #documentFile target="_blank"></a>
         </div>
-        <div class="w-100">
-          <audio
-            src="../../../../../assets/audio/AUDIO_RIZOMAS.mp3"
-            controls
-          ></audio>
+        <div class="w-100" *ngIf="audio">
+          <audio [src]="audio.archivo | safe" controls></audio>
         </div>
       </div>
     </div>

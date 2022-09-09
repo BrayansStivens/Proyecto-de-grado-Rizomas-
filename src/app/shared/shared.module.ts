@@ -13,6 +13,8 @@ import { IconTextComponent } from './components/table/cell-types/icon-text/icon-
 import { ImagesComponent } from './components/table/cell-types/images/images.component';
 import { LinkComponent } from './components/table/cell-types/link/link.component';
 import { StarRateComponent } from './components/table/cell-types/star-rate/star-rate.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SafePipe } from '../safe.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { StarRateComponent } from './components/table/cell-types/star-rate/star-
     ImagesComponent,
     LinkComponent,
     StarRateComponent,
+    NotFoundComponent,
+    SafePipe,
   ],
   imports: [CommonModule, SharedRoutingModule, MaterialModule],
   exports: [
@@ -33,6 +37,7 @@ import { StarRateComponent } from './components/table/cell-types/star-rate/star-
     NavbarComponent,
     LoaderComponent,
     TableComponent,
+    SafePipe,
   ],
 })
 export class SharedModule {}

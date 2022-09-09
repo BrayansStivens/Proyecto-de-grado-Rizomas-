@@ -35,5 +35,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('');
   }
 
-  arbol(): void {}
+  arbol(): void {
+    this.router.navigateByUrl('invitados');
+  }
 }

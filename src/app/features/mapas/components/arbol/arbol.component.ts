@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalContentidoComponent } from '../modal-contentido/modal-contentido.component';
 import { PuntosService } from '../../../admin/services/puntos.service';
+import { ContenidosService } from '../../services/contenidos.service';
 
 @Component({
   selector: 'rizo-arbol',
@@ -15,26 +16,32 @@ export class ArbolComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private puntosService: PuntosService
+    private puntosService: PuntosService,
+    private contenidosService: ContenidosService
   ) {}
 
   ngOnInit(): void {}
 
-  getContenidos() {
+  getContenidos(id: string) {
     this.loader = true;
-    this.puntosService.getPonit(1).subscribe(
-      (response) => {
-        this.loader = false;
-        this.punto = response[0];
-        this.contenidos = response[0].contenido;
-        this.dialog.open(ModalContentidoComponent, {
-          disableClose: true,
-          autoFocus: false,
-          data: {
-            punto: this.punto,
-            contenidos: this.contenidos,
+    this.contenidosService.getContentsByPoint(id).subscribe(
+      (responseContenido) => {
+        this.puntosService.getPonit(id).subscribe(
+          (responsePunto) => {
+            this.loader = false;
+            this.punto = responsePunto[0];
+            this.contenidos = responseContenido;
+            this.dialog.open(ModalContentidoComponent, {
+              disableClose: true,
+              autoFocus: false,
+              data: {
+                punto: this.punto,
+                contenidos: this.contenidos,
+              },
+            });
           },
-        });
+          () => (this.loader = false)
+        );
       },
       () => (this.loader = false)
     );

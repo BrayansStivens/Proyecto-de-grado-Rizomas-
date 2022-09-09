@@ -23,7 +23,7 @@ export class UsuariosComponent implements OnInit {
   loader!: boolean;
   dataSourse = new MatTableDataSource<any>();
   paginationType = PaginationType.CLIENT;
-  selectStrategy = SelectionStrategy.NONE;
+  selectStrategy = SelectionStrategy.MULTIPLE;
   form!: FormGroup;
   mensajeError!: string;
   mensajeBoton!: string;
@@ -64,6 +64,7 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.valueChanges();
+    this.fillTable();
   }
 
   createForm() {
@@ -83,8 +84,8 @@ export class UsuariosComponent implements OnInit {
       nombre: ['', Validators.required],
       primerApellido: ['', Validators.required],
       segundoApellido: ['', Validators.required],
-      groups: [''],
-      programs: [''],
+      programaId: [''],
+      grupoId: [''],
       file: ['', Validators.pattern('^.*.(.csv)$')],
     });
   }
@@ -104,36 +105,39 @@ export class UsuariosComponent implements OnInit {
         this.disabledGropu = true;
         this.getGroups();
         this.getPrograms();
-        this.form.get('groups')?.addValidators(Validators.required);
-        this.form.get('programs')?.addValidators(Validators.required);
+        this.form.get('grupoId')?.addValidators(Validators.required);
+        this.form.get('programaId')?.addValidators(Validators.required);
         this.form.updateValueAndValidity();
       } else {
         this.disabledGropu = false;
-        this.form.get('groups')?.clearValidators();
-        this.form.get('programs')?.clearValidators();
+        this.form.get('grupoId')?.clearValidators();
+        this.form.get('programaId')?.clearValidators();
         this.form.updateValueAndValidity();
       }
     });
   }
 
   fillTable(): void {
-    if (this.form.get('email')?.valid) {
+    /*     if (this.form.get('email')?.valid) {
       this.loader = true;
       const param = { email: this.form.get('email')?.value };
       this.usuariosService.getUserByEmail(param).subscribe(
         (response) => {
           this.loader = false;
           this.dataSourse.data = [response];
-          /*  console.log(this.dataSourse.data);
+           console.log(this.dataSourse.data);
           this.dataSourse.data.forEach((element) => {
             element.action = [{ name: ' create' }, { name: 'delete' }];
-          }); */
+          });
         },
         () => (this.loader = false)
       );
     } else {
       this.form.get('email')?.markAsTouched();
-    }
+    } */
+    this.usuariosService.getAllUsers().subscribe((response) => {
+      this.dataSourse.data = response;
+    });
   }
 
   getGroups(): void {
@@ -159,12 +163,12 @@ export class UsuariosComponent implements OnInit {
     }
     if (this.form.valid) {
       this.loader = true;
-      const { role, groups, file, ...rest } = this.form.value;
+      const { role, ...rest } = this.form.value;
       const payload = rest;
-      console.log();
       this.usuariosService.register(payload).subscribe(
         () => {
           this.createRole({ email: payload.email, ...role }, payload);
+          this.form.reset();
         },
         (error: any) => {
           this.loader = false;
@@ -229,7 +233,7 @@ export class UsuariosComponent implements OnInit {
         this.loader = false;
         this.alertService.mensajeCorrecto(
           'Registro exitoso',
-          'Docente creado con exito 😇'
+          'Alumno creado con exito 😇'
         );
       },
       (error: any) => {
@@ -334,4 +338,6 @@ export class UsuariosComponent implements OnInit {
     this.form.enable();
     this.form.updateValueAndValidity();
   }
+
+  postExecel(): void {}
 }
