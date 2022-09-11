@@ -182,25 +182,27 @@ export class GruposComponent implements OnInit {
         `¿Realmente desea eliminar al grupo: ${group.group}?`,
         'SI, DESEO ELIMINAR'
       )
-      .then(() => {
-        this.gruposService.deleteGroup(this.id).subscribe(
-          () => {
-            this.loader = false;
-            this.alertService.mensajeCorrecto(
-              'Grupo eliminado',
-              `El grupo ${group.group} se elimino con exito`
-            );
-            this.id = '';
-            this.fillTable();
-          },
-          (error: any) => {
-            this.loader = false;
-            this.alertService.mensajeError(
-              'Eliminación fallida',
-              `Grupo no eliminado, error: ${{ error }}`
-            );
-          }
-        );
+      .then((response) => {
+        if (response.isConfirmed) {
+          this.gruposService.deleteGroup(this.id).subscribe(
+            () => {
+              this.loader = false;
+              this.alertService.mensajeCorrecto(
+                'Grupo eliminado',
+                `El grupo ${group.group} se elimino con exito`
+              );
+              this.id = '';
+              this.fillTable();
+            },
+            (error: any) => {
+              this.loader = false;
+              this.alertService.mensajeError(
+                'Eliminación fallida',
+                `Grupo no eliminado, error: ${{ error }}`
+              );
+            }
+          );
+        }
       })
       .catch(() => (this.loader = false));
   }

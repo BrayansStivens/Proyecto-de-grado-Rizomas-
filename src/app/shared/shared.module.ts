@@ -15,6 +15,8 @@ import { LinkComponent } from './components/table/cell-types/link/link.component
 import { StarRateComponent } from './components/table/cell-types/star-rate/star-rate.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SafePipe } from '../safe.pipe';
+import { ModalEncuestaComponent } from './components/modal-encuesta/modal-encuesta.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { SafePipe } from '../safe.pipe';
     LinkComponent,
     StarRateComponent,
     NotFoundComponent,
+    ModalEncuestaComponent,
+    StarRatingComponent,
     SafePipe,
   ],
   imports: [CommonModule, SharedRoutingModule, MaterialModule],
@@ -37,6 +41,8 @@ import { SafePipe } from '../safe.pipe';
     NavbarComponent,
     LoaderComponent,
     TableComponent,
+    ModalEncuestaComponent,
+    StarRatingComponent,
     SafePipe,
   ],
 })

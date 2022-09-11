@@ -9,6 +9,10 @@ import { Constants } from '../API/environment.interface';
 export class WebRequestService {
   constructor(private http: HttpClient) {}
 
+  getiP(): Observable<any> {
+    return this.http.get<any>(Constants.ROOT_IP_API);
+  }
+
   get(url: string, params?: any): Observable<any> {
     return this.http.get<any>(`${Constants.ROOT_URL}/${url}`, {
       params: params,

@@ -8,6 +8,7 @@ import { PuntosComponent } from './components/puntos/puntos.component';
 import { ContenidosComponent } from './components/contenidos/contenidos.component';
 import { SharedModule } from '../../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
+import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     MenuAdminComponent,
     PuntosComponent,
     ContenidosComponent,
+    ConfiguracionesComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule],
   exports: [MenuAdminComponent],

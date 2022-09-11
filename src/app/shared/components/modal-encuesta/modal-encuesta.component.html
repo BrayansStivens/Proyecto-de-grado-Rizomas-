@@ -1,0 +1,50 @@
+<div mat-dialog-title>
+  <button mat-icon-button mat-dialog-close class="float-end">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h1 class="text-center">Rizomas</h1>
+</div>
+
+<div mat-dialog-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="fw-bold">¿Te gusto el contenido de la pagina?</h2>
+        <rizo-star-rating
+          [rating]="rating"
+          [starCount]="starCount"
+          (ratingUpdated)="showComent($event, 0)"
+        ></rizo-star-rating>
+      </div>
+      <div class="col-12 text-center" *ngIf="response[0] === true">
+        <mat-form-field class="w-75" appearance="outline">
+          <mat-label>Deja tu comentario</mat-label>
+          <textarea matInput placeholder="Deja tu comentario"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-12 text-center">
+        <h2 class="fw-bold">¿Te gusto la pagina?</h2>
+        <rizo-star-rating
+          [rating]="rating"
+          [starCount]="starCount"
+          (ratingUpdated)="showComent($event, 1)"
+        ></rizo-star-rating>
+      </div>
+      <div class="col-12 text-center" *ngIf="response[1] === true">
+        <mat-form-field class="w-75" appearance="outline">
+          <mat-label>Deja tu comentario</mat-label>
+          <textarea matInput placeholder="Deja tu comentario"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="mt-3 text-center">
+      <button
+        mat-raised-button
+        color="primary"
+        [textContent]="'ENVIAR'"
+        class="w-50 text text-light"
+      ></button>
+    </div>
+  </div>
+</div>

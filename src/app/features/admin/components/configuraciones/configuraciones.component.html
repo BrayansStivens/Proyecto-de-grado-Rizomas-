@@ -1,0 +1,58 @@
+<rizo-loader [loader]="loader"></rizo-loader>
+<div class="container mt-5">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Asignatura</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="subject"
+            placeholder="Asignatura"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Programa</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="program"
+            placeholder="Programa"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="container d-lg-flex -justify-content-between mt-1">
+    <div class="col-12 col-lg-6">
+      <div class="text-center">
+        <button
+          class="w-75 m-4"
+          mat-flat-button
+          color="primary"
+          [textContent]="'Crear'"
+          (click)="create()"
+        ></button>
+      </div>
+      <div class="mt-3"></div>
+      <rizo-table
+        [data]="dataSourse"
+        [columnHeader]="columnHeader"
+        [paginationType]="paginationType"
+        [selectStrategy]="selectStrategy"
+        (actionEvent)="actionEvent($event)"
+      ></rizo-table>
+    </div>
+    <div class="col-12 col-lg-6 text-center my-4">
+      <img
+        src="../../../../../assets/images/LogoRizomas.png"
+        alt="rizomas"
+        class="img-fluid"
+      />
+    </div>
+  </div>
+</div>

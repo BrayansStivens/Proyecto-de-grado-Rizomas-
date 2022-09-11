@@ -220,25 +220,27 @@ export class ContenidosComponent implements OnInit {
         `¿Realmente desea eliminar el contenido?`,
         'SI, DESEO ELIMINAR'
       )
-      .then(() => {
-        this.contenidosService.deleteContent(this.id).subscribe(
-          () => {
-            this.loader = false;
-            this.alertsService.mensajeCorrecto(
-              'Contenido eliminado',
-              `El contenido se elimino con exito`
-            );
-            this.id = '';
-            this.fillTable();
-          },
-          (error: any) => {
-            this.loader = false;
-            this.alertsService.mensajeError(
-              'Eliminación fallida',
-              `Contenido no eliminado, error: ${{ error }}`
-            );
-          }
-        );
+      .then((response) => {
+        if (response.isConfirmed) {
+          this.contenidosService.deleteContent(this.id).subscribe(
+            () => {
+              this.loader = false;
+              this.alertsService.mensajeCorrecto(
+                'Contenido eliminado',
+                `El contenido se elimino con exito`
+              );
+              this.id = '';
+              this.fillTable();
+            },
+            (error: any) => {
+              this.loader = false;
+              this.alertsService.mensajeError(
+                'Eliminación fallida',
+                `Contenido no eliminado, error: ${{ error }}`
+              );
+            }
+          );
+        }
       })
       .catch(() => (this.loader = false));
   }

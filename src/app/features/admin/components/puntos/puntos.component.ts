@@ -192,5 +192,6 @@ export class PuntosComponent implements OnInit {
     this.form.reset();
     this.file = null;
     this.messageFileError = '';
+    this.id = '';
   }
 }

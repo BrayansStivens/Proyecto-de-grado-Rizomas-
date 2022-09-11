@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalEncuestaComponent } from '../../../../shared/components/modal-encuesta/modal-encuesta.component';
 
 @Component({
   selector: 'rizo-menu-mapa',
@@ -11,14 +13,24 @@ export class MenuMapaComponent implements OnInit {
 
   textBtnLogOut!: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.openQuest();
     if (this.router.url.includes('invitados')) {
       this.textBtnLogOut = 'VOLVER';
     } else {
       this.textBtnLogOut = 'SALIR';
     }
+  }
+
+  openQuest(): void {
+    setTimeout(() => {
+      this.dialog.open(ModalEncuestaComponent, {
+        width: '630px',
+        autoFocus: true,
+      });
+    }, 600000);
   }
 
   tabChange(event: any) {
