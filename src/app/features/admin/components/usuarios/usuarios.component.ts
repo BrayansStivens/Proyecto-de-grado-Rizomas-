@@ -259,7 +259,6 @@ export class UsuariosComponent implements OnInit {
   subirArchivo() {
     this.loader = true;
     const fileForm = new FormData();
-    console.log(this.archivoExcel);
     fileForm.append(
       'files',
       this.archivoExcel.fileRaw,

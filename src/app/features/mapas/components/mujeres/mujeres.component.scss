@@ -1,10 +1,10 @@
 svg {
-  width: 600px;
+  width: 800px;
 }
 
 @media (max-width: 480px) {
   svg {
-    width: 360px;
+    width: 330px;
   }
 }
 
@@ -12,4 +12,93 @@ svg {
   svg {
     width: 600px;
   }
+}
+
+.senora_1_ {
+  transform: matrix(1, 0, 0, 1, 128.1545, 136.2858);
+}
+.senora_1_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 128.1545, 136.2858);
+}
+
+.senora_2_ {
+  transform: matrix(1, 0, 0, 1, 1075.106, 0);
+}
+
+.senora_2_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1075.106, 0);
+}
+
+.senora_3_ {
+  transform: matrix(1, 0, 0, 1, 1368.1774, 351.0172);
+}
+
+.senora_3_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1368.1774, 351.0172);
+}
+
+.senora_4_ {
+  transform: matrix(1, 0, 0, 1, 1563.1656, 813.5142);
+}
+
+.senora_4_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1563.1656, 813.5142);
+}
+
+.senora_5_ {
+  transform: matrix(1, 0, 0, 1, 862.6546, 515.5714);
+}
+
+.senora_5_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 862.6546, 515.5714);
+}
+
+.senora_6_ {
+  transform: matrix(1, 0, 0, 1, 1055.9403, 1048.0714);
+}
+
+.senora_6_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1055.9403, 1048.0714);
+}
+
+.senora_7_ {
+  transform: matrix(1, 0, 0, 1, 1381.0117, 834.7143);
+}
+
+.senora_7_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1381.0117, 834.7143);
+}
+
+.senora_8_ {
+  transform: matrix(1, 0, 0, 1, 955.8089, 1482.2856);
+}
+
+.senora_8_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 955.8089, 1482.2856);
+}
+
+.senora_9_ {
+  transform: matrix(1, 0, 0, 1, 1765.7802, 1387.9078);
+}
+
+.senora_9_:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1765.7802, 1387.9078);
 }

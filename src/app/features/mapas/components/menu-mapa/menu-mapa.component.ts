@@ -25,12 +25,11 @@ export class MenuMapaComponent implements OnInit {
   }
 
   openQuest(): void {
-    setTimeout(() => {
-      this.dialog.open(ModalEncuestaComponent, {
-        width: '630px',
-        autoFocus: true,
-      });
-    }, 600000);
+    this.dialog.open(ModalEncuestaComponent, {
+      width: '630px',
+      autoFocus: true,
+    });
+    setTimeout(() => {}, 600000);
   }
 
   tabChange(event: any) {
