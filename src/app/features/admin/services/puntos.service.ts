@@ -27,8 +27,12 @@ export class PuntosService {
     return this.webRequest.getWithHeaders(this.pathPoints);
   }
 
-  getPonit(param: any): Observable<any> {
+  getPonits(param: any): Observable<any> {
     return this.webRequest.getWithHeaders(`${this.pathPoints}/mapa/${param}`);
+  }
+
+  getPoint(param: any): Observable<any> {
+    return this.webRequest.getWithHeaders(`${this.pathPoints}/${param}`);
   }
 
   updatePonit(payload: any, param: any): Observable<any> {

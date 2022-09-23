@@ -26,7 +26,7 @@ export class ArbolComponent implements OnInit {
     this.loader = true;
     this.contenidosService.getContentsByPoint(id).subscribe(
       (responseContenido) => {
-        this.puntosService.getPonit(id).subscribe(
+        this.puntosService.getPoint(id).subscribe(
           (responsePunto) => {
             this.loader = false;
             this.punto = responsePunto[0];

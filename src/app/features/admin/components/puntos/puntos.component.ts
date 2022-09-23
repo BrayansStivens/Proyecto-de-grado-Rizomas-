@@ -141,7 +141,7 @@ export class PuntosComponent implements OnInit {
           url: element.archivo,
         };
         element.action = [{ name: 'create' }];
-        this.puntosService.getMap(element.id).subscribe((response) => {
+        this.puntosService.getMap(element.mapaId).subscribe((response) => {
           element.mapa = response.nombre;
         });
       });

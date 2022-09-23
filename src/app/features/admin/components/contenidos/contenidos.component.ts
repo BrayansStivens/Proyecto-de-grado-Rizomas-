@@ -87,7 +87,7 @@ export class ContenidosComponent implements OnInit {
   }
 
   getPoints(event: any): void {
-    this.puntosService.getPonit(event).subscribe((response) => {
+    this.puntosService.getPonits(event).subscribe((response) => {
       this.points = response;
     });
   }
@@ -98,7 +98,7 @@ export class ContenidosComponent implements OnInit {
       this.dataSourse.data.forEach((element) => {
         element.action = [{ name: 'create' }, { name: 'delete' }];
         element.creado = element.creado.slice(0, -9);
-        this.puntosService.getPonit(element.puntoId).subscribe((response) => {
+        this.puntosService.getPoint(element.puntoId).subscribe((response) => {
           element.punto = response[0].nombre;
         });
         this.puntosService.getMap(element.mapaId).subscribe((response) => {
