@@ -29,7 +29,7 @@ export class MujeresComponent implements OnInit {
         this.puntosService.getPoint(id).subscribe(
           (responsePunto) => {
             this.loader = false;
-            this.punto = responsePunto[0];
+            this.punto = responsePunto;
             this.contenidos = responseContenido;
             this.dialog.open(ModalContentidoComponent, {
               disableClose: true,

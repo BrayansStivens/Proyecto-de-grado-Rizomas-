@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   @Input() btnLogOut: boolean = false;
   @Input() textBtnLogOut: string = '';
 
+  loader: boolean = false;
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
@@ -36,6 +38,10 @@ export class NavbarComponent implements OnInit {
   }
 
   arbol(): void {
-    this.router.navigateByUrl('invitados');
+    this.loader = true;
+    this.router
+      .navigateByUrl('invitados')
+      .then(() => (this.loader = false))
+      .catch(() => (this.loader = false));
   }
 }

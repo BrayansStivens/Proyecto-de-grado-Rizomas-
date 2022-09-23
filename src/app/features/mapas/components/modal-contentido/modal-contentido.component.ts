@@ -21,6 +21,7 @@ export class ModalContentidoComponent implements OnInit {
 
   ngOnInit(): void {
     this.asingContentsActives();
+    console.log(this.data);
     this.data.punto.descripcion = this.data.punto.descripcion
       .split('\n')
       .join('<br />')

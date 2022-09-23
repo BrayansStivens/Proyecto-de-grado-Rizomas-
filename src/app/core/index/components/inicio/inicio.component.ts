@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio.component.scss'],
 })
 export class InicioComponent implements OnInit {
+  loader: boolean = false;
   animations: boolean = true;
 
   constructor(private router: Router) {}
@@ -14,6 +15,10 @@ export class InicioComponent implements OnInit {
   ngOnInit(): void {}
 
   arbol() {
-    this.router.navigateByUrl('/invitados');
+    this.loader = true;
+    this.router
+      .navigateByUrl('/invitados')
+      .then(() => (this.loader = false))
+      .catch(() => (this.loader = false));
   }
 }
