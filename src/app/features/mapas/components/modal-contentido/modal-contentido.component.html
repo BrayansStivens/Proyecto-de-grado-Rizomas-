@@ -1,57 +1,80 @@
-<div matDialogTitle>
-  <div class="float-end">
-    <button mat-icon-button matDialogClose>
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <h1 class="fw-bold text-center">{{ data.punto.titulo }}</h1>
-</div>
-<div matDialogContent>
-  <div class="container mt-3">
-    <div class="text-center">
-      <img
-        width="250px"
-        [src]="data.punto.archivo"
-        class="img-fluid"
-        [alt]="data.punto.nombre"
-      />
+<div class="bg-modal">
+  <div matDialogTitle>
+    <div class="float-end">
+      <button mat-icon-button matDialogClose>
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
-    <p [innerHTML]="data.punto.descripcion"></p>
+    <h1 class="fw-bold text-center">{{ data.punto.titulo }}</h1>
+  </div>
 
-    <div class="row mt-5">
-      <div
-        [ngClass]="texto || audio ? 'col-12 col-lg-6' : 'col-12'"
-        *ngIf="video"
-      >
-        <div class="ratio ratio-16x9">
-          <iframe
-            [src]="video.archivo | safe"
-            allowfullscreen
-            video
-            controls
-          ></iframe>
+  <div class="content-modal">
+    <div matDialogContent>
+      <div class="container mt-3">
+        <div class="d-flex justify-content-center my-5">
+          <img
+            width="250px"
+            [src]="data.punto.archivo"
+            class="img-fluid"
+            [alt]="data.punto.nombre"
+          />
         </div>
-      </div>
-      <div
-        [ngClass]="
-          video
-            ? 'col-12 col-lg-6 text-center my-lg-auto'
-            : 'col-12 text-center my-lg-auto'
-        "
-        *ngIf="texto || audio"
-      >
-        <div class="my-5" *ngIf="texto">
-          <button
-            type="button"
-            mat-raised-button
-            color="accent"
-            (click)="documentFile.click()"
-            [textContent]="'Ver documento'"
-          ></button>
-          <a [href]="texto.archivo | safe" #documentFile target="_blank"></a>
-        </div>
-        <div class="w-100" *ngIf="audio">
-          <audio [src]="audio.archivo | safe" controls></audio>
+
+        <p [innerHTML]="data.punto.descripcion"></p>
+
+        <h2 class="text-center mt-5 fw-bold" *ngIf="data.contenidos.length">
+          CONTENIDOS
+        </h2>
+
+        <div class="row mt-5">
+          <div
+            [ngClass]="texto || audio ? 'col-12 col-lg-6' : 'col-12'"
+            *ngIf="video"
+          >
+            <div class="ratio ratio-16x9">
+              <iframe
+                [src]="video.archivo | safe"
+                allowfullscreen
+                video
+                controls
+                controlsList="nodownload"
+              ></iframe>
+            </div>
+          </div>
+
+          <div
+            [ngClass]="
+              video
+                ? 'col-12 col-lg-6 text-center my-lg-auto'
+                : 'col-12 text-center my-lg-auto'
+            "
+            *ngIf="texto || audio"
+          >
+            <div class="mb-5" *ngIf="texto">
+              <button
+                class="w-100"
+                type="button"
+                mat-raised-button
+                color="accent"
+                (click)="documentFile.click()"
+                [textContent]="'Ver documento'"
+              ></button>
+              <a
+                [href]="texto.archivo | safe"
+                #documentFile
+                target="_blank"
+              ></a>
+            </div>
+
+            <div *ngIf="audio">
+              <audio
+                class="w-100"
+                [src]="audio.archivo | safe"
+                controls
+                controlsList="nodownload"
+              ></audio>
+            </div>
+          </div>
         </div>
       </div>
     </div>

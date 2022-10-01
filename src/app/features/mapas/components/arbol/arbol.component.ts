@@ -33,7 +33,7 @@ export class ArbolComponent implements OnInit {
             this.contenidos = responseContenido;
             this.dialog.open(ModalContentidoComponent, {
               disableClose: true,
-              autoFocus: false,
+              autoFocus: 'h2',
               data: {
                 punto: this.punto,
                 contenidos: this.contenidos,
