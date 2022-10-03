@@ -83,7 +83,7 @@ export class UsuariosComponent implements OnInit {
       identificacion: ['', Validators.required],
       nombre: ['', Validators.required],
       primerApellido: ['', Validators.required],
-      segundoApellido: ['', Validators.required],
+      segundoApellido: [''],
       programaId: [''],
       grupoId: [''],
       file: ['', Validators.pattern('^.*.(.csv)$')],

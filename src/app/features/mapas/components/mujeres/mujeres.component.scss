@@ -102,3 +102,13 @@ svg {
   transition: all 0.5s;
   transform: matrix(1.08, 0, 0, 1.08, 1765.7802, 1387.9078);
 }
+
+.argentina {
+  transform: matrix(1, 0, 0, 1, 1431.4346, 1889.3893);
+}
+
+.argentina:hover {
+  cursor: pointer;
+  transition: all 0.5s;
+  transform: matrix(1.08, 0, 0, 1.08, 1431.4346, 1889.3893);
+}

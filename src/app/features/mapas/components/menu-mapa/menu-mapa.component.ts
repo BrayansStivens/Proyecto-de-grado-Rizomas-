@@ -13,26 +13,15 @@ export class MenuMapaComponent implements OnInit {
 
   textBtnLogOut!: string;
 
-  constructor(private router: Router, private dialog: MatDialog) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.openQuest();
     if (this.router.url.includes('invitados')) {
       this.textBtnLogOut = 'VOLVER';
     } else {
       this.textBtnLogOut = 'SALIR';
     }
   }
-
-  openQuest(): void {
-    setTimeout(() => {
-      this.dialog.open(ModalEncuestaComponent, {
-        width: '630px',
-        autoFocus: true,
-      });
-    }, 600000);
-  }
-
   tabChange(event: any) {
     this.ventana.emit(event.tab.textLabel);
   }

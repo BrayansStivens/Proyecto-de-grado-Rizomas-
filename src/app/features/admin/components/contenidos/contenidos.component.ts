@@ -99,7 +99,7 @@ export class ContenidosComponent implements OnInit {
         element.action = [{ name: 'create' }, { name: 'delete' }];
         element.creado = element.creado.slice(0, -9);
         this.puntosService.getPoint(element.puntoId).subscribe((response) => {
-          element.punto = response[0].nombre;
+          element.punto = response.nombre;
         });
         this.puntosService.getMap(element.mapaId).subscribe((response) => {
           element.mapa = response.nombre;

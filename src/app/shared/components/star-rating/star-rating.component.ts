@@ -41,7 +41,6 @@ export class StarRatingComponent implements OnInit {
       }
     );
     this.ratingUpdated.emit(this.rating);
-    console.log(this.rating);
     return false;
   }
 }
