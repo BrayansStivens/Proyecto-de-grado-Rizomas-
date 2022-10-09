@@ -208,7 +208,6 @@ export class GruposComponent implements OnInit {
   }
 
   actionEvent(event: any) {
-    console.log(event.row);
     if (event.action === 'create') {
       this.form.patchValue(event.row);
       this.id = event.row.id;

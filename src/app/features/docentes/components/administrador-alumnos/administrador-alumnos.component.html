@@ -1,7 +1,43 @@
 <rizo-loader [loader]="loader"></rizo-loader>
 
 <div class="container mt-5">
-  <form></form>
+  <form>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Grupo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">{{
+              grupo.group
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-lg-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Correo Alumno</mat-label>
+          <input type="text" matInput placeholder="Correo alumno" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="mt-5">
+    <div class="w-full d-flex justify-content-between text-center gap-5">
+      <button
+        mat-flat-button
+        color="primary"
+        [textContent]="'Buscar'"
+        class="w-75"
+      ></button>
+      <button
+        mat-flat-button
+        color="accent"
+        [textContent]="'Limpiar'"
+        class="w-75"
+      ></button>
+    </div>
+  </div>
 
   <div class="mt-5 mb-3">
     <rizo-table

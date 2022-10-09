@@ -1,0 +1,26 @@
+<div class="bg">
+  <div matDialogTitle>
+    <div class="float-end">
+      <button mat-icon-button matDialogClose>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <h2 class="fw-bold text-center">Seguimiento</h2>
+  </div>
+
+  <div matDialogContent>
+    <div class="container">
+      <div>
+        <h2 class="fw-bold text-start">{{ data.estudiante.nombre }}</h2>
+      </div>
+      <div class="mt-4 mb-3">
+        <rizo-table
+          [data]="dataSourse"
+          [columnHeader]="columnHeader"
+          [paginationType]="paginationType"
+          [selectStrategy]="selectStrategy"
+        ></rizo-table>
+      </div>
+    </div>
+  </div>
+</div>
