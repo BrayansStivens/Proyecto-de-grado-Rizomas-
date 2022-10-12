@@ -10,6 +10,6 @@ export class ValoracionService {
   constructor( private webRequestService: WebRequestService) { }
 
   createValoracion(id:number, payload:any):Observable<any>{
-    return this.webRequestService.post(`contenidos/${id}/valoraciones`, payload);
+    return this.webRequestService.postWithHeaders(`contenidos/${id}/valoraciones`, payload);
   }
 }
