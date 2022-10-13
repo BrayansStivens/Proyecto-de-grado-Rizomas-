@@ -30,6 +30,8 @@ export class GruposService {
   }
 
   getPupilbyGroup(param: any): Observable<any> {
-    return this.webRequest.get(`${this.path}/${param}`);
+    return this.webRequest.getWithHeaders(
+      `${this.path}/AlumnoEngrupo/${param}`
+    );
   }
 }

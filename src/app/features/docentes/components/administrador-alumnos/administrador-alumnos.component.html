@@ -1,12 +1,12 @@
 <rizo-loader [loader]="loader"></rizo-loader>
 
 <div class="container mt-5">
-  <form>
+  <form [formGroup]="form">
     <div class="row">
       <div class="col-12 col-lg-6">
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>Grupo</mat-label>
-          <mat-select>
+          <mat-select formControlName="grupoid">
             <mat-option *ngFor="let grupo of grupos" [value]="grupo.id">{{
               grupo.group
             }}</mat-option>
@@ -29,12 +29,14 @@
         color="primary"
         [textContent]="'Buscar'"
         class="w-75"
+        (click)="getPupilsByGroup()"
       ></button>
       <button
         mat-flat-button
         color="accent"
         [textContent]="'Limpiar'"
         class="w-75"
+        (click)="limpiar()"
       ></button>
     </div>
   </div>
