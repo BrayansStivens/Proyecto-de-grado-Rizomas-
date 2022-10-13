@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { WebRequestService } from 'src/app/core/services/web-request.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValoracionService {
 

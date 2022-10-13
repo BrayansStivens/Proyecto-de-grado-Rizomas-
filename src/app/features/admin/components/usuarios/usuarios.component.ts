@@ -29,9 +29,11 @@ export class UsuariosComponent implements OnInit {
   mensajeBoton!: string;
   archivoExcel!: any;
   nameFile!: string;
-  disabledGropu!: boolean;
+  disabledGropu: boolean = false;
   groups!: Array<any>;
   programs!: Array<any>;
+  usersSelected: Array<any> = [];
+  clearItemsSelected!: boolean;
 
   roles: Array<any> = [
     { role: 'Administrador', value: { claimName: 'EsAdmin', claimValue: '1' } },
@@ -83,7 +85,7 @@ export class UsuariosComponent implements OnInit {
       identificacion: ['', Validators.required],
       nombre: ['', Validators.required],
       primerApellido: ['', Validators.required],
-      segundoApellido: [''],
+      segundoApellido: ['', Validators.required],
       programaId: [''],
       grupoId: [''],
       file: ['', Validators.pattern('^.*.(.csv)$')],
@@ -102,39 +104,43 @@ export class UsuariosComponent implements OnInit {
 
     this.form.get('role')?.valueChanges.subscribe((value) => {
       if (value.claimName === 'EsEstudiante') {
-        this.disabledGropu = true;
-        this.getGroups();
-        this.getPrograms();
-        this.form.get('grupoId')?.addValidators(Validators.required);
-        this.form.get('programaId')?.addValidators(Validators.required);
-        this.form.updateValueAndValidity();
+        this.addValidators();
       } else {
-        this.disabledGropu = false;
-        this.form.get('grupoId')?.clearValidators();
-        this.form.get('programaId')?.clearValidators();
-        this.form.updateValueAndValidity();
+        this.removeValidators();
       }
     });
   }
 
+  addValidators() {
+    this.disabledGropu = true;
+    this.getGroups();
+    this.getPrograms();
+    this.form.get('grupoId')?.setValidators(Validators.required);
+    this.form.get('programaId')?.setValidators(Validators.required);
+    this.form.updateValueAndValidity();
+  }
+  removeValidators() {
+    this.disabledGropu = false;
+    this.form.get('grupoId')?.clearValidators();
+    this.form.get('programaId')?.clearValidators();
+    this.form.updateValueAndValidity();
+  }
+
   fillTable(): void {
-    /*     if (this.form.get('email')?.valid) {
+    if (this.form.get('email')?.valid) {
       this.loader = true;
       const param = { email: this.form.get('email')?.value };
       this.usuariosService.getUserByEmail(param).subscribe(
         (response) => {
           this.loader = false;
           this.dataSourse.data = [response];
-           console.log(this.dataSourse.data);
           this.dataSourse.data.forEach((element) => {
             element.action = [{ name: ' create' }, { name: 'delete' }];
           });
         },
         () => (this.loader = false)
       );
-    } else {
-      this.form.get('email')?.markAsTouched();
-    } */
+    }
     this.usuariosService.getAllUsers().subscribe((response) => {
       this.dataSourse.data = response;
     });
@@ -169,6 +175,7 @@ export class UsuariosComponent implements OnInit {
         () => {
           this.createRole({ email: payload.email, ...role }, payload);
           this.form.reset();
+          this.fillTable();
         },
         (error: any) => {
           this.loader = false;
@@ -280,6 +287,53 @@ export class UsuariosComponent implements OnInit {
         );
       }
     );
+  }
+
+  getSelected(event: Array<any>): any {
+    this.usersSelected = event;
+    if (this.usersSelected.length > 0) {
+      this.addValidators();
+    } else {
+      this.removeValidators();
+    }
+  }
+
+  async x() {
+    if (this.form.get('grupoId')?.valid && this.form.get('programaId')?.valid) {
+      await this.usersSelected.forEach((element) => {
+        this.usuariosService
+          .getRoleByUser(element.email)
+          .subscribe((response: any) => {
+            if (response[0].type === 'EsEstudiante') {
+              this.createPupilByTable(element);
+            }
+          });
+      });
+      this.selectStrategy = SelectionStrategy.NONE;
+      setTimeout(() => {
+        this.usersSelected = [];
+        this.removeValidators();
+        this.selectStrategy = SelectionStrategy.MULTIPLE;
+      });
+    } else {
+      this.form.get('programaId')?.markAsTouched();
+      this.form.get('grupoId')?.markAsTouched();
+    }
+  }
+
+  createPupilByTable(element: any): void {
+    const { email, identificacion, nombre, primerApellido, segundoApellido } =
+      element;
+    const payload = {
+      email: email,
+      identificacion: identificacion,
+      nombre: nombre,
+      primerApellido: primerApellido,
+      segundoApellido: segundoApellido,
+      programaId: this.form.get('programaId')?.value,
+      grupoId: this.form.get('grupoId')?.value,
+    };
+    this.alumnosService.createPupil(payload).subscribe(() => {});
   }
 
   eliminarArchivo(): void {

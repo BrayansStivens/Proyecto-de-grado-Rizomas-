@@ -38,8 +38,8 @@ export class ConfiguracionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.valueChanges();
     this.fillTable();
+    this.valueChangesInput();
   }
 
   createForm(): void {
@@ -49,9 +49,12 @@ export class ConfiguracionesComponent implements OnInit {
     });
   }
 
-  valueChanges(): void {
+  valueChangesInput(): void {
     const subject = this.form.get('subject');
     const program = this.form.get('program');
+    let hasSubjectValue = false;
+    let hasProgramtValue = false;
+
     subject?.valueChanges.subscribe((value) => {
       if (value) {
         program?.disable();
@@ -59,6 +62,7 @@ export class ConfiguracionesComponent implements OnInit {
         program?.enable();
       }
     });
+
     program?.valueChanges.subscribe((value) => {
       if (value) {
         subject?.disable();
@@ -66,26 +70,36 @@ export class ConfiguracionesComponent implements OnInit {
         subject?.enable();
       }
     });
+
     this.form.updateValueAndValidity();
   }
 
   fillTable(): void {
+    this.loader = true;
     this.asignaturasService.getAllSubjects().subscribe((responseSubject) => {
       this.dataSourse.data = responseSubject;
+
+      this.mapData();
     });
+    this.loader = true;
     this.programasService.getAllPrograms().subscribe((responseProgram) => {
       this.dataSourse.data = [...this.dataSourse.data, ...responseProgram];
-      this.dataSourse.data.forEach((element) => {
-        element.action = [{ name: 'delete' }];
-        if (element.subject) {
-          element.tipo = 'Asignatura';
-          element.nombre = element.subject;
-        }
-        if (element.program) {
-          element.tipo = 'Programa';
-          element.nombre = element.program;
-        }
-      });
+      this.mapData();
+      this.loader = false;
+    });
+  }
+
+  mapData() {
+    this.dataSourse.data.forEach((element) => {
+      element.action = [{ name: 'delete' }];
+      if (element.subject) {
+        element.tipo = 'Asignatura';
+        element.nombre = element.subject;
+      }
+      if (element.program) {
+        element.tipo = 'Programa';
+        element.nombre = element.program;
+      }
     });
   }
 

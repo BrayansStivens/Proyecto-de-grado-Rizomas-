@@ -2,91 +2,93 @@
 
 <div class="container mt-5">
   <form [formGroup]="form">
-    <div class="row">
-      <div class="col-12 col-lg-4 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            placeholder="Email"
-            formControlName="email"
-          />
-          <mat-error>{{ errorEmail() }}</mat-error>
-        </mat-form-field>
+    <div *ngIf="!usersSelected.length">
+      <div class="row">
+        <div class="col-12 col-lg-4 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              placeholder="Email"
+              formControlName="email"
+            />
+            <mat-error>{{ errorEmail() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-4 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Contraseña"
+              formControlName="password"
+            />
+            <mat-error>{{ errorPassword() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-4 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+              <mat-option *ngFor="let role of roles" [value]="role.value">{{
+                role.role
+              }}</mat-option>
+            </mat-select>
+            <mat-error>Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
       </div>
-      <div class="col-12 col-lg-4 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Contraseña</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Contraseña"
-            formControlName="password"
-          />
-          <mat-error>{{ errorPassword() }}</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-lg-4 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="role">
-            <mat-option *ngFor="let role of roles" [value]="role.value">{{
-              role.role
-            }}</mat-option>
-          </mat-select>
-          <mat-error>Campo requerido</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-lg-3 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Identificación</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Identificación"
-            formControlName="identificacion"
-          />
-          <mat-error>Campo requerido</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-lg-3 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Nombre(s)</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Nombre(s)"
-            formControlName="nombre"
-          />
-          <mat-error>Campo requerido</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-lg-3 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Primer apellido</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Primer apellido"
-            formControlName="primerApellido"
-          />
-          <mat-error>Campo requerido</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col-12 col-lg-3 text-center">
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Segundo apellido</mat-label>
-          <input
-            type="text"
-            matInput
-            placeholder="Segundo apellido"
-            formControlName="segundoApellido"
-          />
-          <mat-error>Campo requerido</mat-error>
-        </mat-form-field>
+      <div class="row">
+        <div class="col-12 col-lg-3 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Identificación</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Identificación"
+              formControlName="identificacion"
+            />
+            <mat-error>Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-3 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Nombre(s)</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Nombre(s)"
+              formControlName="nombre"
+            />
+            <mat-error>Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-3 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Primer apellido</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Primer apellido"
+              formControlName="primerApellido"
+            />
+            <mat-error>Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-lg-3 text-center">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Segundo apellido</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Segundo apellido"
+              formControlName="segundoApellido"
+            />
+            <mat-error>Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -114,7 +116,7 @@
           <mat-error>Campo requerido</mat-error>
         </mat-form-field>
       </div>
-      <div class="col-12 col-lg-4">
+      <div class="col-12 col-lg-4" *ngIf="!usersSelected.length">
         <button
           type="button"
           mat-raised-button
@@ -147,30 +149,52 @@
       </div>
     </div>
   </form>
+</div>
 
-  <div class="d-flex justify-content-lg-between row mt-4">
+<div class="container mt-5">
+  <div class="row gap-3 gap-lg-0">
     <div
-      class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-between"
+      class="col-12 col-lg-3 text-center text-lg-start"
+      *ngIf="!usersSelected.length"
     >
       <button
-        class="btn m-4"
+        class="w-75"
         mat-flat-button
         color="primary"
         [textContent]="'Registar'"
         (click)="createUser()"
       ></button>
-
+    </div>
+    <div
+      class="col-12 col-lg-3 text-center text-lg-start"
+      *ngIf="usersSelected.length"
+    >
       <button
-        class="btn m-4"
+        class="w-75"
+        mat-flat-button
+        color="primary"
+        [textContent]="'Asignar grupo'"
+        (click)="x()"
+      ></button>
+    </div>
+    <div
+      class="col-12 col-lg-3 text-center text-lg-start"
+      *ngIf="!usersSelected.length"
+    >
+      <button
+        class="w-75"
         mat-stroked-button
         color="primary"
-        [textContent]="'Buscar'"
+        [textContent]="'Buscar por email'"
         (click)="fillTable()"
       ></button>
     </div>
-    <div class="col-12 col-lg-8 d-flex justify-content-end">
+    <div
+      *ngIf="!usersSelected.length"
+      class="col-12 col-lg-6 text-center text-lg-end"
+    >
       <button
-        class="btn m-4"
+        class="w-75"
         mat-flat-button
         color="accent"
         [textContent]="'Limpiar'"
@@ -178,13 +202,14 @@
       ></button>
     </div>
   </div>
+</div>
 
-  <div class="mt-5 mb-3">
-    <rizo-table
-      [data]="dataSourse"
-      [columnHeader]="columnHeader"
-      [paginationType]="paginationType"
-      [selectStrategy]="selectStrategy"
-    ></rizo-table>
-  </div>
+<div class="container mt-5 mb-3">
+  <rizo-table
+    [data]="dataSourse"
+    [columnHeader]="columnHeader"
+    [paginationType]="paginationType"
+    [selectStrategy]="selectStrategy"
+    (selected)="getSelected($event)"
+  ></rizo-table>
 </div>

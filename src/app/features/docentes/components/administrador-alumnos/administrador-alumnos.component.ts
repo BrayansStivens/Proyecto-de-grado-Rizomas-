@@ -4,6 +4,7 @@ import { GruposService } from 'src/app/features/admin/services/grupos.service';
 import { AlumnosService } from '../../../admin/services/alumnos.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SeguimientoModalComponent } from '../seguimiento-modal/seguimiento-modal.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import {
   PaginationType,
   SelectionStrategy,
@@ -20,26 +21,38 @@ export class AdministradorAlumnosComponent implements OnInit {
   dataSourse = new MatTableDataSource<any>();
   paginationType = PaginationType.CLIENT;
   selectStrategy = SelectionStrategy.NONE;
+  form!: FormGroup;
 
   grupos!: Array<any>;
+  alumnos!: Array<any>;
 
   columnHeader = {
-    correo: { label: 'Correo' },
+    /*  correo: { label: 'Correo' }, */
     nombre: { label: 'Nombre' },
-    documento: { label: 'Documento' },
-    semestre: { label: 'Semestre' },
-    asignatura: { label: 'Asignatura' },
+    primerApellido: { label: 'Primer Apellido' },
+    segundoApellido: { label: 'Segundo Apellido' },
+    identificacion: { label: 'Documento' },
+    /*  semestre: { label: 'Semestre' },
+    asignatura: { label: 'Asignatura' }, */
     action: { label: 'Acciones', type: CellType.ACTIONS },
   };
   constructor(
     private gruposService: GruposService,
     private alumnosService: AlumnosService,
+    private formBuilder: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     this.getAllGroups();
-    this.fillTable();
+  }
+
+  createForm(): void {
+    this.form = this.formBuilder.group({
+      grupoid: [''],
+    });
   }
 
   getAllGroups(): void {
@@ -48,18 +61,22 @@ export class AdministradorAlumnosComponent implements OnInit {
     });
   }
 
-  fillTable(): void {
-    this.dataSourse.data = [
-      {
-        correo: 'Estudiante@example.com',
-        nombre: 'Estudiante Primer Apellido Segundo Apellido',
-        documento: '105515045',
-        semestre: '2022-2',
-        asignatura: 'CTS',
-        action: [{ name: 'remove_red_eye' }],
-      },
-    ];
+  getPupilsByGroup(): void {
+    this.loader = true;
+    this.gruposService
+      .getPupilbyGroup(this.form.get('grupoid')?.value)
+      .subscribe((response: any) => {
+        this.dataSourse.data = response;
+        this.dataSourse.data.forEach((element: any) => {
+          element.action = [{ name: 'remove_red_eye' }];
+        });
+        this.loader = false;
+      });
   }
+
+  /*   fillTable(): void {
+    this.getPupilsByGroup();
+  } */
 
   openSeguimiento(data: any): void {
     this.dialog.open(SeguimientoModalComponent, {
@@ -70,7 +87,11 @@ export class AdministradorAlumnosComponent implements OnInit {
   }
 
   actionEvent(event: any): void {
-    console.log(event);
     this.openSeguimiento(event.row);
+  }
+
+  limpiar() {
+    this.form.reset();
+    this.dataSourse.data = [];
   }
 }
