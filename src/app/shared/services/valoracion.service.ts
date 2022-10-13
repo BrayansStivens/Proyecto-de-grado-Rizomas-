@@ -6,12 +6,10 @@ import { WebRequestService } from 'src/app/core/services/web-request.service';
   providedIn: 'root',
 })
 export class ValoracionService {
-  constructor(private webRequestService: WebRequestService) {}
 
-  createValoracion(id: number, payload: any): Observable<any> {
-    return this.webRequestService.postWithHeaders(
-      `contenidos/${id}/valoraciones`,
-      payload
-    );
+  constructor( private webRequestService: WebRequestService) { }
+
+  createValoracion(id:number, payload:any):Observable<any>{
+    return this.webRequestService.postWithHeaders(`contenidos/${id}/valoraciones`, payload);
   }
 }
