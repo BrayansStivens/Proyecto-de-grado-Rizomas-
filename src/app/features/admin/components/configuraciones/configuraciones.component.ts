@@ -76,17 +76,23 @@ export class ConfiguracionesComponent implements OnInit {
 
   fillTable(): void {
     this.loader = true;
-    this.asignaturasService.getAllSubjects().subscribe((responseSubject) => {
-      this.dataSourse.data = responseSubject;
-
-      this.mapData();
-    });
-    this.loader = true;
-    this.programasService.getAllPrograms().subscribe((responseProgram) => {
-      this.dataSourse.data = [...this.dataSourse.data, ...responseProgram];
-      this.mapData();
-      this.loader = false;
-    });
+    this.asignaturasService.getAllSubjects().subscribe(
+      (responseSubject) => {
+        let subjests: Array<any> = [];
+        let programs: Array<any> = [];
+        subjests = responseSubject;
+        this.programasService.getAllPrograms().subscribe(
+          (responseProgram) => {
+            programs = responseProgram;
+            this.dataSourse.data = [...subjests, ...programs];
+            this.mapData();
+            this.loader = false;
+          },
+          () => (this.loader = false)
+        );
+      },
+      () => (this.loader = false)
+    );
   }
 
   mapData() {

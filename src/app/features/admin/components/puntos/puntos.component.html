@@ -65,7 +65,7 @@
           #fileInput
           type="file"
           formControlName="file"
-          accept=".png"
+          accept=".png, .jpg"
           (change)="captureFile($event)"
         />
         <mat-error>{{ messageFileError }}</mat-error>
@@ -78,39 +78,33 @@
           </button>
         </small>
       </div>
-      <!-- <div class="col-12 col-lg-4 text-center" *ngIf="id">
-        <button
-          class="w-75 mt-3 mt-lg-0"
-          type="button"
-          mat-raised-button
-          color="accent"
-          [textContent]="'Descargar imagen'"
-          (click)="downloadImage($event)"
-        ></button>
-
-        <mat-error></mat-error>
-      </div> -->
     </div>
   </form>
+</div>
 
-  <div class="d-flex justify-content-between">
-    <button
-      class="btn m-4"
-      mat-flat-button
-      color="primary"
-      [textContent]="'Actualizar'"
-      (click)="updatePoint()"
-    ></button>
-
-    <button
-      class="btn m-4"
-      mat-flat-button
-      color="accent"
-      [textContent]="'Limpiar'"
-      (click)="limpiar()"
-    ></button>
+<div class="container mt-5">
+  <div class="row gap-3 gap-lg-0">
+    <div class="col-12 col-lg-6 text-center text-lg-start">
+      <button
+        class="w-75"
+        mat-flat-button
+        color="primary"
+        [textContent]="'Actualizar'"
+        (click)="updatePoint()"
+      ></button>
+    </div>
+    <div class="col-12 col-lg-6 text-center text-lg-end">
+      <button
+        class="w-75"
+        mat-flat-button
+        color="accent"
+        [textContent]="'Limpiar'"
+        (click)="limpiar()"
+      ></button>
+    </div>
   </div>
-
+</div>
+<div class="container">
   <div class="mt-5 mb-3">
     <rizo-table
       [data]="dataSourse"

@@ -101,7 +101,7 @@ export class GruposComponent implements OnInit {
         this.loader = false;
         this.dataSourse.data = response;
         this.dataSourse.data.forEach((element) => {
-          element.action = [{ name: 'create' }, { name: 'delete' }];
+          element.action = [/* { name: 'create' }, */ { name: 'delete' }];
           this.asignaturasService
             .getSubject(element.asignaturaId)
             .subscribe((response) => (element.asignatura = response.subject));

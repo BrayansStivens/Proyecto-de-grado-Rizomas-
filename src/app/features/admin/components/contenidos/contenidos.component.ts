@@ -130,6 +130,7 @@ export class ContenidosComponent implements OnInit {
 
   createContent(): void {
     if (this.form.valid) {
+      console.log('1');
       this.loader = true;
       const {
         creado,
@@ -142,7 +143,7 @@ export class ContenidosComponent implements OnInit {
         mapaId,
       } = this.form.value;
       const fileForm = new FormData();
-      fileForm.append('Creado', creado && moment(creado).format('DD-MM-YYYY'));
+      fileForm.append('Creado', creado && moment(creado).format('MM-DD-YYYY'));
       fileForm.append('Titulo', titulo);
       fileForm.append('Estado', estado);
       fileForm.append('Autor', autor);
@@ -151,23 +152,48 @@ export class ContenidosComponent implements OnInit {
       fileForm.append('PuntoId', puntoId);
       fileForm.append('MapaId', mapaId);
       fileForm.append('Archivo', this.file.fileRaw, this.file.fileName);
-
-      this.contenidosService.createContent(fileForm).subscribe(
-        () => {
-          this.loader = false;
-          this.alertsService.mensajeCorrecto(
-            'Registro exitoso',
-            'Contenido creado con exito 😇'
-          );
-          this.limpiar();
-          this.fillTable();
-        },
-        () => (this.loader = false)
-      );
+      this.validateAndCreate(fileForm);
     } else {
       this.errorFile();
       this.form.markAllAsTouched();
     }
+  }
+
+  validateAndCreate(fileForm: FormData): void {
+    console.log('2');
+    const { estado, puntoId, tipo } = this.form.value;
+    this.contenidosService
+      .getContentsByPoint(puntoId)
+      .subscribe((response: Array<any>) => {
+        console.log(response);
+        const contenido = response.find(
+          (element: any) => element.estado === estado && element.tipo === tipo
+        );
+        if (contenido) {
+          this.alertsService.mensajeError(
+            'NO SE PUEDE GUARDAR EL CONTENIDO',
+            `Ya existe para este punto un contenido de tipo ${tipo} con el estado ${estado}`
+          );
+          this.loader = false;
+        } else {
+          this.createContentValidate(fileForm);
+        }
+      });
+  }
+
+  createContentValidate(fileForm: FormData): void {
+    this.contenidosService.createContent(fileForm).subscribe(
+      () => {
+        this.loader = false;
+        this.alertsService.mensajeCorrecto(
+          'Registro exitoso',
+          'Contenido creado con exito 😇'
+        );
+        this.limpiar();
+        this.fillTable();
+      },
+      () => (this.loader = false)
+    );
   }
 
   updateContent(): void {
@@ -184,7 +210,7 @@ export class ContenidosComponent implements OnInit {
         mapaId,
       } = this.form.value;
       const fileForm = new FormData();
-      fileForm.append('Creado', creado && moment(creado).format('DD-MM-YYYY'));
+      fileForm.append('Creado', creado && moment(creado).format('MM-DD-YYYY'));
       fileForm.append('Titulo', titulo);
       fileForm.append('Estado', estado);
       fileForm.append('Autor', autor);
@@ -240,6 +266,8 @@ export class ContenidosComponent implements OnInit {
               );
             }
           );
+        } else {
+          this.loader = false;
         }
       })
       .catch(() => (this.loader = false));

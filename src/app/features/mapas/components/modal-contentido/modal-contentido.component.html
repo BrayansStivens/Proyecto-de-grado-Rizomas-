@@ -5,7 +5,9 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <h1 class="fw-bold text-center">{{ data.punto.titulo }}</h1>
+    <p class="fw-bold text-center" style="font-size: 22px">
+      {{ data.punto.titulo }}
+    </p>
   </div>
 
   <div class="content-modal">
@@ -32,7 +34,7 @@
             *ngIf="video"
           >
             <div class="ratio ratio-16x9">
-              <h4 class="text-center fw-semibold">{{video.titulo}}</h4>
+              <h4 class="text-center fw-semibold">{{ video.titulo }}</h4>
               <iframe
                 [src]="video.archivo | safe"
                 allowfullscreen
@@ -52,7 +54,7 @@
             *ngIf="texto || audio"
           >
             <div class="mb-5" *ngIf="texto">
-              <h4 class="text-center fw-semibold">{{texto.titulo}}</h4>
+              <h4 class="text-center fw-semibold">{{ texto.titulo }}</h4>
               <button
                 class="w-100"
                 type="button"
@@ -69,7 +71,7 @@
             </div>
 
             <div *ngIf="audio">
-              <h4 class="text-center fw-semibold">{{audio.titulo}}</h4>
+              <h4 class="text-center fw-semibold">{{ audio.titulo }}</h4>
               <audio
                 class="w-100"
                 [src]="audio.archivo | safe"

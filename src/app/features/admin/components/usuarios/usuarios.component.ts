@@ -117,17 +117,23 @@ export class UsuariosComponent implements OnInit {
     this.getPrograms();
     this.form.get('grupoId')?.setValidators(Validators.required);
     this.form.get('programaId')?.setValidators(Validators.required);
+    this.form.get('grupoId')?.enable();
+    this.form.get('programaId')?.enable();
     this.form.updateValueAndValidity();
   }
   removeValidators() {
     this.disabledGropu = false;
-    this.form.get('grupoId')?.clearValidators();
-    this.form.get('programaId')?.clearValidators();
-    this.form.updateValueAndValidity();
+    if (!this.disabledGropu) {
+      this.form.get('grupoId')?.clearValidators();
+      this.form.get('programaId')?.clearValidators();
+      this.form.get('grupoId')?.disable();
+      this.form.get('programaId')?.disable();
+      this.form.updateValueAndValidity();
+    }
   }
 
-  fillTable(): void {
-    if (this.form.get('email')?.valid) {
+  fillTable(buscar?: boolean): void {
+    if (this.form.get('email')?.valid && buscar) {
       this.loader = true;
       const param = { email: this.form.get('email')?.value };
       this.usuariosService.getUserByEmail(param).subscribe(
@@ -140,10 +146,11 @@ export class UsuariosComponent implements OnInit {
         },
         () => (this.loader = false)
       );
+    } else {
+      this.usuariosService.getAllUsers().subscribe((response) => {
+        this.dataSourse.data = response;
+      });
     }
-    this.usuariosService.getAllUsers().subscribe((response) => {
-      this.dataSourse.data = response;
-    });
   }
 
   getGroups(): void {
@@ -174,7 +181,7 @@ export class UsuariosComponent implements OnInit {
       this.usuariosService.register(payload).subscribe(
         () => {
           this.createRole({ email: payload.email, ...role }, payload);
-          this.form.reset();
+          this.limpiar();
           this.fillTable();
         },
         (error: any) => {
@@ -278,6 +285,7 @@ export class UsuariosComponent implements OnInit {
           'Registro exitoso',
           'Usuarios creados con exito 😇'
         );
+        this.fillTable();
       },
       (error: any) => {
         this.loader = false;
@@ -298,9 +306,10 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  async x() {
+  async asignarGrupos() {
+    this.loader = true;
     if (this.form.get('grupoId')?.valid && this.form.get('programaId')?.valid) {
-      await this.usersSelected.forEach((element) => {
+      await this.usersSelected.forEach((element: any, index: number) => {
         this.usuariosService
           .getRoleByUser(element.email)
           .subscribe((response: any) => {
@@ -308,6 +317,9 @@ export class UsuariosComponent implements OnInit {
               this.createPupilByTable(element);
             }
           });
+        if (index === this.usersSelected.length - 1) {
+          this.loader = false;
+        }
       });
       this.selectStrategy = SelectionStrategy.NONE;
       setTimeout(() => {

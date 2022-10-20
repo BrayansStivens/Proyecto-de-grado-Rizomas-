@@ -16,7 +16,7 @@ const routes: Routes = [
     data: {
       role: 'admin',
     },
-    canActivate: [AuthGuard],
+    /* canActivate: [AuthGuard], */
   },
   {
     path: 'mapas',
@@ -25,7 +25,7 @@ const routes: Routes = [
     data: {
       role: 'estudiante',
     },
-    canActivate: [AuthGuard],
+    /* canActivate: [AuthGuard], */
   },
   {
     path: 'docente',

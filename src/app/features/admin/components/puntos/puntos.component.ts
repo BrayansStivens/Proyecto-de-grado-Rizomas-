@@ -53,7 +53,10 @@ export class PuntosComponent implements OnInit {
       nombre: ['', Validators.required],
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      file: ['', [Validators.required, Validators.pattern('^.*.(.png)$')]],
+      file: [
+        '',
+        [Validators.required, Validators.pattern('^.*.(.png|.PNG|.jpg|.JPG)$')],
+      ],
       mapaId: ['', Validators.required],
     });
   }
@@ -174,7 +177,7 @@ export class PuntosComponent implements OnInit {
   errorFile() {
     const file = this.form.get('file');
     if (file?.hasError('pattern') && !file?.hasError('required')) {
-      this.messageFileError = 'Sólo archivos PNG';
+      this.messageFileError = 'Sólo archivos PNG JPG';
     } else if (file?.hasError('required')) {
       this.messageFileError = 'Campo requerido';
     } else {
