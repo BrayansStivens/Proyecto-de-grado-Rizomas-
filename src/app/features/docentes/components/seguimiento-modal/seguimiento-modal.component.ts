@@ -19,8 +19,8 @@ export class SeguimientoModalComponent implements OnInit {
   estudiante!: any;
 
   columnHeader = {
-    mapa: { label: 'Mapa' },
-    porcentaje: { label: '% Visto' },
+    punto: { label: 'Punto' },
+    visto: { label: 'Visto' },
   };
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -35,8 +35,8 @@ export class SeguimientoModalComponent implements OnInit {
 
   fillTable(): void {
     this.dataSourse.data = [
-      { mapa: 'Árbol', porcentaje: '30%' },
-      { mapa: 'Mujeres', porcentaje: '80%' },
+      { punto: 'Delfín', visto: 'si' },
+      { punto: 'Hornero', visto: 'no' },
     ];
   }
 }

@@ -81,7 +81,7 @@ export class LoginModalComponent implements OnInit {
     this.UsuariosService.getUserByEmail({
       email: this.form.get('email')?.value,
     }).subscribe((response) => {
-      this.router.navigateByUrl(`mapas/menu/id:${response.id}`);
+      this.router.navigateByUrl(`mapas/menu/id:${response.identificacion}`);
     });
   }
 
