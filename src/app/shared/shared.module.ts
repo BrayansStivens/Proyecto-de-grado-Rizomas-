@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MaterialModule } from './material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -34,10 +35,11 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
     StarRatingComponent,
     SafePipe,
   ],
-  imports: [CommonModule, SharedRoutingModule, MaterialModule],
+  imports: [CommonModule, SharedRoutingModule, MaterialModule, DragDropModule],
   exports: [
     MaterialModule,
     HttpClientModule,
+    DragDropModule,
     NavbarComponent,
     LoaderComponent,
     TableComponent,

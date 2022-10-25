@@ -121,6 +121,7 @@ export class UsuariosComponent implements OnInit {
     this.form.get('programaId')?.enable();
     this.form.updateValueAndValidity();
   }
+
   removeValidators() {
     this.disabledGropu = false;
     if (!this.disabledGropu) {
@@ -345,7 +346,27 @@ export class UsuariosComponent implements OnInit {
       programaId: this.form.get('programaId')?.value,
       grupoId: this.form.get('grupoId')?.value,
     };
-    this.alumnosService.createPupil(payload).subscribe(() => {});
+    this.validatePupil(payload);
+  }
+
+  validatePupil(payload: any) {
+    this.gruposService
+      .getPupilbyGroup(this.form.get('grupoId')?.value)
+      .subscribe((response: Array<any>) => {
+        const pupil = response.find(
+          (element: any) => element.identificacion === payload.identificacion
+        );
+
+        if (!pupil) {
+          this.alumnosService.createPupil(payload).subscribe(() => {});
+        } else {
+          this.alertService.mensajeError(
+            'Alumno con grupo asignado',
+            `El alumno con la identificación ${payload.identificacion} ya tiene un grupo asignado`
+          );
+          this.loader = false;
+        }
+      });
   }
 
   eliminarArchivo(): void {
@@ -403,6 +424,4 @@ export class UsuariosComponent implements OnInit {
     this.form.enable();
     this.form.updateValueAndValidity();
   }
-
-  postExecel(): void {}
 }

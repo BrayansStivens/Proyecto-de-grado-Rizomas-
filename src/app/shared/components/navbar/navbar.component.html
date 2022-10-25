@@ -1,7 +1,7 @@
 <rizo-loader [loader]="loader"></rizo-loader>
-<!-- <nav class="navbar navbar-expand-lg navbar-light rizoNav">
+<nav class="navbar navbar-expand-lg navbar-light rizoNav">
   <div class="container">
-       <div class="col-4">
+    <div class="col-4">
       <img
         src="../../../../assets/images/LogoColmayor.png"
         alt="ColMaLogo"
@@ -58,78 +58,6 @@
           ></button>
         </div>
       </ul>
-    </div>
-  </div>
-</nav> -->
-
-<nav class="navbar navbar-expand-lg navbar-light rizoNav">
-  <div class="container w-100">
-    <div class="col-4">
-      <div class="row d-flex justify-content-between items-start">
-        <div class="col-12 col-lg-6">
-          <img
-            src="../../../../assets/images/LogoColmayor.png"
-            alt="ColMaLogo"
-            class="img-fluid"
-          />
-        </div>
-        <div class="col-12 col-lg-6">
-          <img
-            src="../../../../assets/images/LogoITM.png"
-            alt="ITMLogo"
-            class="img-fluid"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <h1 class="text-center title">
-        {{ "ADMINISTRADOR" }}
-      </h1>
-    </div>
-    <div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#menu"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-    <div class="col-12 col-lg-4">
-      <div class="collapse navbar-collapse" id="menu">
-        <div class="navbar-nav d-flex justify-content-end">
-          <div class="logOut" *ngIf="btnLogOut">
-            <button
-              class="fw-bold w-100"
-              mat-raised-button
-              color="warn"
-              [textContent]="textBtnLogOut"
-              (click)="logOut()"
-            ></button>
-          </div>
-          <div class="login" *ngIf="btnLogin">
-            <button
-              class="fw-bold w-100"
-              mat-raised-button
-              [textContent]="'INICIAR SESIÓN'"
-              (click)="login()"
-            ></button>
-          </div>
-          <div class="comencemos mt-2" *ngIf="btnStart">
-            <button
-              class="fw-bold w-100"
-              mat-raised-button
-              [textContent]="'COMENCEMOS'"
-              (click)="arbol()"
-            ></button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </nav>
