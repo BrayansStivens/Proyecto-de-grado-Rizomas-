@@ -31,6 +31,7 @@ export class UsuariosComponent implements OnInit {
   nameFile!: string;
   disabledGropu: boolean = false;
   groups!: Array<any>;
+  pupils!: Array<any>;
   programs!: Array<any>;
   usersSelected: Array<any> = [];
   clearItemsSelected!: boolean;
@@ -48,7 +49,7 @@ export class UsuariosComponent implements OnInit {
     nombreCompleto: { label: 'Nombre' },
     email: { label: 'Email' },
     identificacion: { label: 'Identificación' },
-    /*  action: { label: 'Acciones', type: CellType.ACTIONS }, */
+    action: { label: 'Eliminar Grupo', type: CellType.ACTIONS },
   };
 
   constructor(
@@ -141,17 +142,30 @@ export class UsuariosComponent implements OnInit {
         (response) => {
           this.loader = false;
           this.dataSourse.data = [response];
-          this.dataSourse.data.forEach((element) => {
-            element.action = [{ name: ' create' }, { name: 'delete' }];
-          });
+          this.isPupil();
         },
         () => (this.loader = false)
       );
     } else {
       this.usuariosService.getAllUsers().subscribe((response) => {
         this.dataSourse.data = response;
+        this.isPupil();
       });
     }
+  }
+
+  isPupil() {
+    this.alumnosService.getAllPupils().subscribe((response) => {
+      this.pupils = response;
+      this.dataSourse.data.forEach((element) => {
+        let pupil = this.pupils.find(
+          (pupil: any) => element.identificacion === pupil.identificacion
+        );
+        if (pupil) {
+          element.action = [{ name: 'delete' }];
+        }
+      });
+    });
   }
 
   getGroups(): void {
@@ -316,6 +330,7 @@ export class UsuariosComponent implements OnInit {
           .subscribe((response: any) => {
             if (response[0].type === 'EsEstudiante') {
               this.createPupilByTable(element);
+              this.fillTable();
             }
           });
         if (index === this.usersSelected.length - 1) {
@@ -361,12 +376,46 @@ export class UsuariosComponent implements OnInit {
           this.alumnosService.createPupil(payload).subscribe(() => {});
         } else {
           this.alertService.mensajeError(
-            'Alumno con grupo asignado',
-            `El alumno con la identificación ${payload.identificacion} ya tiene un grupo asignado`
+            'Alumnos con grupo asignado',
+            `Los alumnos con grupo asignado no se les asignarán grupo`
           );
           this.loader = false;
         }
       });
+  }
+
+  actionEvent(event: any) {
+    if (event.action === 'delete') {
+      let pupil = this.pupils.find(
+        (pupil: any) => pupil.identificacion === event.row.identificacion
+      );
+      if (pupil) {
+        this.alertService
+          .confirmDialog(
+            'Eliminar grupo',
+            '¿Desea eliminar el grupo de este alumno?',
+            'Si, eliminar grupo'
+          )
+          .then((response: any) => {
+            if (response.isConfirmed) {
+              this.alumnosService.deletePupil(pupil.id).subscribe(
+                () => {
+                  this.fillTable();
+                  this.alertService.mensajeCorrecto(
+                    'Grupo eliminado del alumno'
+                  );
+                },
+                () => {
+                  this.alertService.mensajeError(
+                    'Error',
+                    'El grupo no se pudo eliminar del alumno'
+                  );
+                }
+              );
+            }
+          });
+      }
+    }
   }
 
   eliminarArchivo(): void {
@@ -375,7 +424,7 @@ export class UsuariosComponent implements OnInit {
     this.form.enable();
     this.form.updateValueAndValidity();
   }
-  //Control de mensajes HTML
+
   errorEmail(): string {
     this.mensajeError = '';
     if (

@@ -27,6 +27,6 @@ export class AlumnosService {
   }
 
   deletePupil(param: any): Observable<any> {
-    return this.webRequest.deleteWithHeaders(this.path, param);
+    return this.webRequest.deleteWithHeaders(`${this.path}/${param}`);
   }
 }
