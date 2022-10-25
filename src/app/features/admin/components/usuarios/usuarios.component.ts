@@ -393,7 +393,7 @@ export class UsuariosComponent implements OnInit {
         this.alertService
           .confirmDialog(
             'Eliminar grupo',
-            '¿Desea eliminar el grupo de este alumno?',
+            '¿Desea eliminar el grupo de este alumno? También se perderán los seguimientos del alumno',
             'Si, eliminar grupo'
           )
           .then((response: any) => {

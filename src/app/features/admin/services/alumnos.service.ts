@@ -23,7 +23,7 @@ export class AlumnosService {
   }
 
   updatePupil(payload: any, param: any): Observable<any> {
-    return this.webRequest.putWithHeaders(this.path, payload, param);
+    return this.webRequest.putWithHeaders(`${this.path}/${param}`, payload);
   }
 
   deletePupil(param: any): Observable<any> {
