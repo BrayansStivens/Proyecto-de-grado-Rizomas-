@@ -16,4 +16,8 @@ export class SeguimientoService {
   postSeguimiento(payload: any): Observable<any> {
     return this.webRequestService.postWithHeaders(this.path, payload);
   }
+
+  getSeguimientoByPupil(param: any): Observable<any> {
+    return this.webRequestService.get(`${this.path}/alumno/${param}`);
+  }
 }

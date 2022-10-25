@@ -1,4 +1,4 @@
-<div class="bg">
+<div class="bg w-100">
   <div matDialogTitle>
     <div class="float-end">
       <button mat-icon-button matDialogClose>
@@ -10,8 +10,17 @@
 
   <div matDialogContent>
     <div class="container">
-      <div>
-        <h2 class="fw-bold text-start">{{ data.estudiante.nombre }}</h2>
+      <div class="col-12 col-lg-6 text-start">
+        <div>
+          <h2 class="fw-bold text-start">
+            {{ data.estudiante.nombre + " " + data.estudiante.primerApellido }}
+          </h2>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 text-start">
+        <h2 class="fw-bold text-start">
+          {{ "Total visto % " + porcentajeVisto }}
+        </h2>
       </div>
       <div class="mt-4 mb-3">
         <rizo-table

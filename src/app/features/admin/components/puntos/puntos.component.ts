@@ -160,7 +160,7 @@ export class PuntosComponent implements OnInit {
     }
   }
 
-  downloadImage(event: any) {
+  /*   downloadImage(event: any) {
     this.puntosService.downloadImage(this.urlDownload).subscribe(
       (blob: any) => {
         const a = document.createElement('a');
@@ -172,7 +172,7 @@ export class PuntosComponent implements OnInit {
       },
       (e: any) => console.log(e)
     );
-  }
+  } */
 
   errorFile() {
     const file = this.form.get('file');

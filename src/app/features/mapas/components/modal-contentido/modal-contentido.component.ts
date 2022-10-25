@@ -71,17 +71,18 @@ export class ModalContentidoComponent implements OnInit {
   }
 
   validateSeguimineto(payload: any) {
-    this.seguimientoService.getAll().subscribe((response: Array<any>) => {
-      console.log(response);
-      const seguimiento = response.find(
-        (element: any) => element.puntoId === payload.puntoId
-      );
-      if (!seguimiento) {
-        setTimeout(() => {
-          this.seguimientoService.postSeguimiento(payload).subscribe();
-        }, 60000);
-      }
-    });
+    this.seguimientoService
+      .getSeguimientoByPupil(payload.alumnoId)
+      .subscribe((response: Array<any>) => {
+        const seguimiento = response.find(
+          (element: any) => element.punto.id === payload.puntoId
+        );
+        if (!seguimiento) {
+          setTimeout(() => {
+            this.seguimientoService.postSeguimiento(payload).subscribe();
+          }, 60000);
+        }
+      });
   }
 
   openQuest() {
