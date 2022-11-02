@@ -264,6 +264,7 @@ export class UsuariosComponent implements OnInit {
           'Registro exitoso',
           'Alumno creado con exito 😇'
         );
+        this.isPupil();
       },
       (error: any) => {
         this.loader = false;
