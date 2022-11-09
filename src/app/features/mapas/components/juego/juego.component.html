@@ -1,0 +1,49 @@
+<h2 class="text-center mt-5 fw-bold">
+  ¿Cuáles mujeres se mencionan en el mapa anterior?
+</h2>
+<h2 class="text-center fw-bold">
+  {{ "Intentos: " + intentos }}
+</h2>
+<div class="container d-flex justify-content-center mt-5">
+  <div class="example-container">
+    <div
+      id="all"
+      cdkDropList
+      [cdkDropListData]="all"
+      cdkDropListConnectedTo="answers"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListEnterPredicate]="noReturnPredicate"
+    >
+      <div
+        class="example-box"
+        *ngFor="let number of all"
+        [cdkDragData]="number"
+        cdkDrag
+      >
+        {{ number.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <div
+      id="answers"
+      cdkDropList
+      [cdkDropListData]="answers"
+      cdkDropListConnectedTo="all"
+      class="example-list-answers"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListEnterPredicate]="evenPredicate"
+    >
+      <div
+        class="example-box"
+        *ngFor="let number of answers"
+        cdkDrag
+        [cdkDragData]="number"
+      >
+        {{ number.name }}
+      </div>
+    </div>
+  </div>
+</div>
