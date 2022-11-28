@@ -1,31 +1,92 @@
-.button-container {
-  margin-top: 5vh;
-
-  width: 120px;
-}
-
-.comencemos {
-  transform: scale(1.3);
-}
-
 rizo-logo {
   width: 30vw;
 }
 
-.planta {
-  margin-top: -17vh;
+.comencemos {
+  background-color: #2d7f0b;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.comencemos-animado {
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(
+    45deg,
+    #2d7f0b,
+    #2d7f0b,
+    #2d7f0b,
+    #2d7f0b,
+    #ffad00,
+    #2d7f0b,
+    #2d7f0b,
+    #2d7f0b,
+    #2d7f0b
+  );
+
+  animation: glowing 50s linear infinite;
+  background-size: 800%;
+}
+
+.help {
+  cursor: pointer;
+  border: none;
+  position: relative;
+  color: #000;
+}
+
+.help-animado {
+  cursor: pointer;
+  border: none;
+  position: relative;
+  color: #fff;
+}
+
+.help-animado::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    #2d7f0b,
+    #ffad00,
+    #2d7f0b,
+    #ffad00,
+    #2d7f0b,
+    #ffad00,
+    #2d7f0b,
+    #ffad00
+  );
+  background-size: 800%;
+  border-radius: 50%;
+
+  animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 @media (max-width: 1023px) {
-  .comencemos {
-    display: none;
-  }
-
-  .planta {
-    margin-top: 10vw;
-  }
-
   rizo-logo {
-    width: 45vh;
+    width: 60vh;
   }
 }

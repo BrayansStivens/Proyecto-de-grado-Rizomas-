@@ -9,6 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PlantaComponent } from './components/planta/planta.component';
 import { AudioModalComponent } from './modals/audio-modal/audio-modal.component';
 import { LoginModalComponent } from './modals/login-modal/login-modal.component';
+import { CreditosComponent } from './modals/creditos/creditos.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LoginModalComponent } from './modals/login-modal/login-modal.component'
     PlantaComponent,
     AudioModalComponent,
     NotFoundComponent,
+    CreditosComponent,
   ],
   imports: [CommonModule, SharedModule],
 })

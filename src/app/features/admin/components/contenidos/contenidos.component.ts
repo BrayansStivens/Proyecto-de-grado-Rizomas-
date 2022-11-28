@@ -130,7 +130,6 @@ export class ContenidosComponent implements OnInit {
 
   createContent(): void {
     if (this.form.valid) {
-      console.log('1');
       this.loader = true;
       const {
         creado,
@@ -160,20 +159,22 @@ export class ContenidosComponent implements OnInit {
   }
 
   validateAndCreate(fileForm: FormData): void {
-    console.log('2');
-    const { estado, puntoId, tipo } = this.form.value;
+    const { estado, puntoId, tipo, esPrivado } = this.form.value;
     this.contenidosService
       .getContentsByPoint(puntoId)
       .subscribe((response: Array<any>) => {
-        console.log(response);
         const contenido = response.find(
-          (element: any) => element.estado === estado && element.tipo === tipo
+          (element: any) =>
+            element.estado === estado &&
+            element.tipo === tipo &&
+            element.esPrivado === esPrivado
         );
-        if (contenido) {
+        if (contenido.estado === 'activo') {
           this.alertsService.mensajeError(
             'NO SE PUEDE GUARDAR EL CONTENIDO',
-            `Ya existe para este punto un contenido de tipo ${tipo} con el estado ${estado}`
+            `Ya existe para este punto un contenido de tipo ${tipo} con el estado ${estado} y visibilidad  ${esPrivado}`
           );
+          this.form.get('estado')?.setValue(' ');
           this.loader = false;
         } else {
           this.createContentValidate(fileForm);

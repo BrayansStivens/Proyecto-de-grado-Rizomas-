@@ -22,6 +22,12 @@
         cdkDrag
       >
         {{ number.name }}
+        <img
+          *cdkDragPreview
+          [src]="number.poster"
+          [alt]="number.name"
+          width="150px"
+        />
       </div>
     </div>
   </div>

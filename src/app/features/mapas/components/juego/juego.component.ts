@@ -14,16 +14,56 @@ import {
 })
 export class JuegoComponent implements OnInit {
   all = [
-    { id: 1, name: 'Esperanza Carvajal' },
-    { id: 2, name: 'Mamá Dulú' },
-    { id: 3, name: 'Débora Arango' },
-    { id: 4, name: 'Angela Laya' },
-    { id: 5, name: 'Ellen Ochoa' },
-    { id: 6, name: 'Berta Cáceres' },
-    { id: 7, name: 'Dolores Huerta' },
-    { id: 8, name: 'Marvel Moreno' },
-    { id: 9, name: 'Sylvia Rivera' },
-    { id: 10, name: 'Aida Ester Bueno' },
+    {
+      id: 1,
+      name: 'Esperanza Carvajal',
+      poster: '../../../../../assets/images/game/esperanza.jpg',
+    },
+    {
+      id: 2,
+      name: 'Mamá Dulú',
+      poster: '../../../../../assets/images/game/mama_dulu.jpg',
+    },
+    {
+      id: 3,
+      name: 'Débora Arango',
+      poster: '../../../../../assets/images/game/debora.jpg',
+    },
+    {
+      id: 4,
+      name: 'Argelia Mercedes Laya',
+      poster: '../../../../../assets/images/game/argelia.jpg',
+    },
+    {
+      id: 5,
+      name: 'Ellen Ochoa',
+      poster: '../../../../../assets/images/game/ellen.jpg',
+    },
+    {
+      id: 6,
+      name: 'Kathrin Barboza',
+      poster: '../../../../../assets/images/game/kathrin.jpg',
+    },
+    {
+      id: 7,
+      name: 'Dolores Huerta',
+      poster: '../../../../../assets/images/game/dolores.jpg',
+    },
+    {
+      id: 8,
+      name: 'Marvel Moreno',
+      poster: '../../../../../assets/images/game/marvel.jpg',
+    },
+    {
+      id: 9,
+      name: 'Sylvia Rivera',
+      poster: '../../../../../assets/images/game/sylvia.jpg',
+    },
+    {
+      id: 10,
+      name: 'Aida Ester Bueno',
+      poster: '../../../../../assets/images/game/aida.jpg',
+    },
   ];
   answers: Array<any> = [];
   reset!: Array<any>;

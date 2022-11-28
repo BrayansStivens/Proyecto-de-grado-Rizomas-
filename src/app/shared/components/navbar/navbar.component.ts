@@ -10,13 +10,14 @@ import { LoginService } from 'src/app/core/index/services/login.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  @Input() tittle: string = '';
+  @Input() title: string = '';
   @Input() btnLogin: boolean = true;
   @Input() btnStart: boolean = true;
   @Input() btnLogOut: boolean = false;
   @Input() textBtnLogOut: string = '';
 
   loader: boolean = false;
+  open: boolean = false;
 
   constructor(
     private dialog: MatDialog,

@@ -1,30 +1,54 @@
 <rizo-loader [loader]="loader"></rizo-loader>
 <rizo-navbar></rizo-navbar>
-<div class="container">
-  <div class="float-end mt-4">
-    <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="animations = !animations">
-        <mat-icon>style</mat-icon>
-        <span>Desactivar/Activar animaciones</span>
+<div class="container-fluid">
+  <div class="row justify-content-end mt-3">
+    <div class="col-4 text-end">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon [ngClass]="animations ? 'help-animado' : 'help'"
+          >more_vert</mat-icon
+        >
       </button>
-    </mat-menu>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="animations = !animations">
+          <mat-icon>{{
+            animations ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <span>{{ animations ? "Desactivar" : "Activar" }} animaciones</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
-  <div class="d-flex justify-content-center">
-    <rizo-logo [animation]="animations"></rizo-logo>
+  <!--LOGO-->
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="d-flex justify-content-center">
+        <rizo-logo [animation]="animations"></rizo-logo>
+      </div>
+    </div>
   </div>
-  <div class="text-center mt-4 ms-3">
-    <button
-      class="fw-bold start comencemos"
-      mat-flat-button
-      color="primary"
-      [textContent]="'COMENCEMOS'"
-      (click)="arbol()"
-    ></button>
+  <!--Botón-->
+  <div class="row mt-3">
+    <div class="col-12 d-lg-flex d-xl-flex d-none justify-content-center">
+      <button
+        [ngClass]="animations ? 'comencemos-animado' : 'comencemos'"
+        class="fw-bold w-25 ms-2"
+        mat-flat-button
+        [textContent]="'COMENCEMOS'"
+        (click)="arbol()"
+      ></button>
+    </div>
   </div>
-  <div class="planta">
-    <rizo-planta></rizo-planta>
+  <!--footer-->
+  <div class="row position-absolute bottom-0 w-100 align-items-end">
+    <div class="col-6 d-flex justify-content-start">
+      <rizo-planta></rizo-planta>
+    </div>
+    <div class="col-6 d-flex justify-content-end text-center">
+      <button mat-icon-button class="text-center" (click)="openCreditos()">
+        <mat-icon [ngClass]="animations ? 'help-animado' : 'help'"
+          >help_outline</mat-icon
+        >
+      </button>
+    </div>
   </div>
 </div>

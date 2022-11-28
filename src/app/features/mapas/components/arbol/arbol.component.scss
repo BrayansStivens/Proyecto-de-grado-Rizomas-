@@ -21,7 +21,7 @@ svg {
 .delfin_1_:hover {
   cursor: pointer;
   transition: 0.5s;
-  transform: matrix(1.1955, 0.0364, -0.033, 1.0966, 528.9697, 1278.792);
+  transform: matrix(1.1955, 0.0364, -0.033, 1.0966, 498.9697, 1250.792);
 }
 
 .pajaro_1_ {
@@ -38,21 +38,21 @@ svg {
   transform: matrix(0.4148, 0, 0, 0.5406, 642.9834, 828.8965);
 }
 
-/* .oso_1_:hover {
+.oso_1_:hover {
   cursor: pointer;
   transition: 0.5s;
   transform: matrix(0.5148, 0, 0, 0.6406, 642.9834, 828.8965);
-} */
+}
 
 .pinguinos_1_ {
   transform: matrix(0.9987, 0, 0, 1.0275, 22.9805, 1294.7695);
 }
 
-/* .pinguinos_1_:hover {
+.pinguinos_1_:hover {
   cursor: pointer;
   transition: 0.5s;
   transform: matrix(1.0987, 0, 0, 1.0975, 22.9805, 1294.7695);
-} */
+}
 
 .barco_1_ {
   transform: matrix(0.9361, 0.0013, -0.0013, 0.9866, 495.8843, 1397.4434);
@@ -102,4 +102,51 @@ svg {
   cursor: pointer;
   transition: 0.5s;
   transform: matrix(1.09977, 0, 0, 1.06, 31.4805, 362.4727);
+}
+
+.tronco_1_ {
+  transform: matrix(0.8292, 0, 0, 0.7765, 187.1367, 512.6553);
+}
+
+.arbol_1_ {
+  transform: matrix(
+    0.4949,
+    -2.218762e-3,
+    2.154033e-3,
+    0.4804,
+    265.2281,
+    620.3446
+  );
+}
+.arbol_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(
+    0.5949,
+    -2.218762e-3,
+    2.154033e-3,
+    0.5804,
+    210.2281,
+    580.3446
+  );
+}
+
+.cometas_1_ {
+  transform: matrix(0.7969, 0, 0, 0.8454, 415.811, 219.4286);
+}
+
+.cometas_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.07969, 0, 0, 1.08454, 385.811, 190.4286);
+}
+
+.senoras_1_ {
+  transform: matrix(0.8275, -1.15e-2, 1.27e-2, 0.9173, 409.9165, 678.0732);
+}
+
+.senoras_1_:hover {
+  cursor: pointer;
+  transition: 0.5s;
+  transform: matrix(1.08275, -1.15e-2, 1.27e-2, 1.09173, 390.9165, 638.0732);
 }

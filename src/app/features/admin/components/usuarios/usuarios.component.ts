@@ -335,6 +335,7 @@ export class UsuariosComponent implements OnInit {
             }
           });
         if (index === this.usersSelected.length - 1) {
+          this.fillTable();
           this.loader = false;
         }
       });
@@ -343,11 +344,14 @@ export class UsuariosComponent implements OnInit {
         this.usersSelected = [];
         this.removeValidators();
         this.selectStrategy = SelectionStrategy.MULTIPLE;
+        this.fillTable();
       });
     } else {
       this.form.get('programaId')?.markAsTouched();
       this.form.get('grupoId')?.markAsTouched();
+      this.fillTable();
     }
+    this.fillTable();
   }
 
   createPupilByTable(element: any): void {

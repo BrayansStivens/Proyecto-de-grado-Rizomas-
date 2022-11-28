@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CreditosComponent } from '../../modals/creditos/creditos.component';
 
 @Component({
   selector: 'rizo-inicio',
@@ -10,7 +12,7 @@ export class InicioComponent implements OnInit {
   loader: boolean = false;
   animations: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -20,5 +22,11 @@ export class InicioComponent implements OnInit {
       .navigateByUrl('/invitados')
       .then(() => (this.loader = false))
       .catch(() => (this.loader = false));
+  }
+
+  openCreditos() {
+    this.dialog.open(CreditosComponent, {
+      disableClose: true,
+    });
   }
 }

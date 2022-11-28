@@ -1,61 +1,114 @@
 <rizo-loader [loader]="loader"></rizo-loader>
 <nav class="navbar navbar-expand-lg navbar-light rizoNav">
-  <div class="container">
-    <div class="col-4">
+  <div class="container-fluid">
+    <div class="col-4 logos d-lg-flex d-none gap-3">
       <img
         src="../../../../assets/images/LogoColmayor.png"
         alt="ColMaLogo"
         class="img-fluid"
+        width="200px"
       />
       <img
         src="../../../../assets/images/LogoITM.png"
         alt="ITMLogo"
         class="img-fluid"
+        width="200px"
       />
     </div>
-    <div class="col-4">
-      <h1 class="text-center tittle">
-        {{ tittle }}
-      </h1>
+    <div class="col-4 d-lg-none d-flex justify-content-start gap-2">
+      <img
+        src="../../../../assets/images/LogoColmayorResponsive.png"
+        alt="ColMaLogo"
+        class="img-fluid"
+        width="50vw"
+      />
+      <img
+        src="../../../../assets/images/LogoITMResponsive.png"
+        alt="ITMLogo"
+        class="img-fluid"
+        width="60vw"
+      />
     </div>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#menu"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="col-4 collapse navbar-collapse" id="menu">
+    <div class="col-lg-6 col-md-4 col-xl-4 col-7 text-center" *ngIf="title">
+      <p class="text-center fw-bold fs-4" style="color: #fff; margin: 0">
+        {{ title }}
+      </p>
+    </div>
+
+    <div
+      class="col-4 col-lg-2 col-xl-4 d-lg-flex d-none justify-content-end"
+      *ngIf="btnLogOut"
+    >
+      <button
+        class="fw-bold w-50"
+        mat-raised-button
+        color="warn"
+        [textContent]="textBtnLogOut"
+        (click)="logOut()"
+      ></button>
+    </div>
+
+    <div
+      class="col-4 col-lg-8 col-xl-8 d-lg-flex d-none justify-content-end"
+      *ngIf="btnLogin"
+    >
+      <button
+        class="fw-bold w-25"
+        mat-raised-button
+        [textContent]="'INICIAR SESIÓN'"
+        (click)="login()"
+      ></button>
+    </div>
+
+    <!--BOTÓN MENÚ-->
+    <div class="col-md-4 col-1 d-flex justify-content-end">
+      <button
+        class="menu-toggler"
+        mat-icon-button
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="open = !open"
+      >
+        <mat-icon>{{ open ? "close" : "menu" }}</mat-icon>
+      </button>
+    </div>
+
+    <!--MENÚ RESPONSIVE-->
+    <div class="col-12 col-lg-4 collapse" id="menu">
       <ul class="navbar-nav d-flex justify-content-end">
-        <div class="row logOut" *ngIf="btnLogOut">
-          <button
-            class="fw-bold"
-            mat-raised-button
-            color="warn"
-            [textContent]="textBtnLogOut"
-            (click)="logOut()"
-          ></button>
-        </div>
-        <div class="row login" *ngIf="btnLogin">
-          <button
-            class="fw-bold"
-            mat-raised-button
-            [textContent]="'INICIAR SESIÓN'"
-            (click)="login()"
-          ></button>
-        </div>
-        <div class="row comencemos mt-2" *ngIf="btnStart">
-          <button
-            class="fw-bold"
-            mat-raised-button
-            [textContent]="'COMENCEMOS'"
-            (click)="arbol()"
-          ></button>
+        <div class="container">
+          <div class="row d-flex flex-column gap-3">
+            <div class="col-12 text-center" *ngIf="btnLogOut">
+              <button
+                class="fw-bold w-75"
+                mat-raised-button
+                color="warn"
+                [textContent]="textBtnLogOut"
+                (click)="logOut()"
+              ></button>
+            </div>
+            <div class="col text-center" *ngIf="btnLogin">
+              <button
+                class="fw-bold w-75"
+                mat-raised-button
+                [textContent]="'INICIAR SESIÓN'"
+                (click)="login()"
+              ></button>
+            </div>
+            <div class="col text-center" *ngIf="btnStart">
+              <button
+                class="fw-bold w-75"
+                mat-raised-button
+                [textContent]="'COMENCEMOS'"
+                (click)="arbol()"
+              ></button>
+            </div>
+          </div>
         </div>
       </ul>
     </div>
